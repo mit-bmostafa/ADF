@@ -1,0 +1,12 @@
+{
+	"name": "lksazuresqldatabase",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=mj-sql-srv-01-ukw.database.windows.net;initial catalog=dev_bi;user id=biadmin",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIk1KLURBVEFGQUNUT1JZLTAxLVVLU184ZDc2OGE1Yi00YzIzLTRkNWQtYWYxZi1kZWRhMDgxMjljMDkiDQp9"
+		}
+	}
+}
