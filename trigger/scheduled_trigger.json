@@ -8,6 +8,10 @@
 				"pipelineReference": {
 					"referenceName": "sftp_poller",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"windowStart": "@trigger().outputs.windowStartTime",
+					"windowEnd": "@trigger().outputs.windowEndTime"
 				}
 			}
 		],
