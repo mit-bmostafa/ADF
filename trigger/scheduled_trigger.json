@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "sftp_poller",
+					"referenceName": "raw_loader",
 					"type": "PipelineReference"
 				},
 				"parameters": {

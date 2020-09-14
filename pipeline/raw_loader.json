@@ -1,5 +1,5 @@
 {
-	"name": "sftp_poller",
+	"name": "raw_loader",
 	"properties": {
 		"activities": [
 			{
