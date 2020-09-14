@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "*.csv",
 				"folderPath": "dtm_eng/in/100000_95",
 				"container": "data"
 			},
