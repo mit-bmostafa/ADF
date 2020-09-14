@@ -3,7 +3,18 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
-		"pipelines": [],
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "sftp_poller",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"windowStart": "@trigger().outputs.windowStartTime",
+					"windowEnd": "@trigger().outputs.windowEndTime"
+				}
+			}
+		],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
