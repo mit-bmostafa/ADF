@@ -146,10 +146,12 @@
 		],
 		"parameters": {
 			"windowStart": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "@trigger().outputs.windowStartTime"
 			},
 			"windowEnd": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "@trigger().outputs.windowEndTime"
 			}
 		},
 		"annotations": [],
