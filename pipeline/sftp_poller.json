@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_ge0",
+				"name": "sftp_poller",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
