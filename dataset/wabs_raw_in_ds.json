@@ -13,7 +13,7 @@
 				"folderPath": "dtm_eng/in/100000_95",
 				"container": "data"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
 			"escapeChar": "\\",
 			"quoteChar": "\""
 		},
