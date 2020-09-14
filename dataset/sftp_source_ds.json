@@ -1,5 +1,5 @@
 {
-	"name": "SourceDataset_ge0",
+	"name": "sftp_source_ds",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lksftpwinserver",

@@ -67,16 +67,32 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_ge0",
+						"referenceName": "sftp_source_ds",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_ge0",
+						"referenceName": "wabs_raw_in_ds",
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "in_out_copy",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"enableStaging": false
+				}
 			}
 		],
 		"parameters": {

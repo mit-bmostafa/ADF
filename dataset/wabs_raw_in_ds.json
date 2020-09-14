@@ -1,5 +1,5 @@
 {
-	"name": "DestinationDataset_ge0",
+	"name": "wabs_raw_in_ds",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lksazureblobstorage",
