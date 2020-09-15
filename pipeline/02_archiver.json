@@ -1,5 +1,5 @@
 {
-	"name": "MoveFiles",
+	"name": "02_archiver",
 	"properties": {
 		"description": "Move files from one folder to another folder",
 		"activities": [
@@ -82,6 +82,9 @@
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
 									},
 									"recursive": false
 								},
@@ -224,7 +227,7 @@
 			},
 			"DestinationStore_Directory": {
 				"type": "String",
-				"defaultValue": "dtm_eng/out/100000_95"
+				"defaultValue": "dtm_eng/out/archive/100000_95"
 			}
 		},
 		"annotations": []
