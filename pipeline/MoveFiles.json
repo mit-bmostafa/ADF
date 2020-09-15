@@ -212,17 +212,19 @@
 		"parameters": {
 			"SourceStore_Location": {
 				"type": "string",
-				"defaultValue": "data/dtm_eng/in/100000_95"
+				"defaultValue": "data"
 			},
 			"SourceStore_Directory": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "dtm_eng/in/100000_95"
 			},
 			"DestinationStore_Location": {
 				"type": "String",
-				"defaultValue": "data/dtm_eng/in/100000_95"
+				"defaultValue": "data"
 			},
 			"DestinationStore_Directory": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "dtm_eng/out/100000_95"
 			}
 		},
 		"annotations": []
