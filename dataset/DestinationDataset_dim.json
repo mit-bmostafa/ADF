@@ -1,5 +1,5 @@
 {
-	"name": "DestinationDataset_ynw",
+	"name": "DestinationDataset_dim",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lksazureblobstorage",
