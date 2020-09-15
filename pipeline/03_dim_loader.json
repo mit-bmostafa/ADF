@@ -1,5 +1,5 @@
 {
-	"name": "copy_dim_tables",
+	"name": "03_dim_loader",
 	"properties": {
 		"activities": [
 			{
