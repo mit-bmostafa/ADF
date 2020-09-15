@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "dmClient",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -9,12 +9,24 @@
 						"referenceName": "glb_dm_client",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "dmClient"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
-			"script": "source(output(\n\t\tid as integer,\n\t\tclient_cd as string,\n\t\tclient as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1"
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "tmp_dm_client",
+						"type": "DatasetReference"
+					},
+					"name": "tmpDmClient"
+				}
+			],
+			"transformations": [
+				{
+					"name": "EngieOnly"
+				}
+			],
+			"script": "source(output(\n\t\tid as integer,\n\t\tclient_cd as string,\n\t\tclient as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> dmClient\ndmClient filter(or(id < 0, like(client, 'Engie%'))) ~> EngieOnly\nEngieOnly sink(input(\n\t\tdate_format_date as date,\n\t\tdate_format_int as integer,\n\t\tdate_format_yyyy_mm_dd as string,\n\t\tdate_format_dd_mm as string,\n\t\tday_suffix as string,\n\t\tday_name as string,\n\t\tday_name_short as string,\n\t\tday_num_of_week_format_d as integer,\n\t\tday_num_of_month_format_dd as string,\n\t\tday_num_of_year_format_ddd as string,\n\t\tday_is_week_end_y_n as string,\n\t\tweek_num_of_year_format_w00 as string,\n\t\tweek_num_of_year_format_yyyy_ww00 as string,\n\t\tweek_num_of_year_format_yyyy__ww00 as string,\n\t\tiso_week_num_of_year_format_w00 as string,\n\t\tiso_week_num_of_year_format_yyyy_ww00 as string,\n\t\tiso_week_num_of_year_format_yyyy__ww00 as string,\n\t\tops_week_num_of_year_format_w00 as string,\n\t\tops_week_num_of_year_format_yyyy_ww00 as string,\n\t\tops_week_num_of_year_format_yyyy__ww00 as string,\n\t\tfirst_day_of_week_format_date as date,\n\t\tlast_day_of_week_format_date as date,\n\t\tweek_num_of_month_format_w as byte,\n\t\tmonth_num_format_mm as string,\n\t\tmonth_num_format_yyyy_mm as string,\n\t\tmonth_name as string,\n\t\tops_month_num_format_mm as string,\n\t\tops_month_num_format_yyyy_mm as string,\n\t\tops_month_name as string,\n\t\tTheMonthShortName as string,\n\t\tfirst_day_of_month_format_date as date,\n\t\tlast_day_of_month_format_date as date,\n\t\tfirst_day_of_next_month_format_date as date,\n\t\tlast_day_of_next_month_format_date as date,\n\t\tquarter_num_format_Q0 as string,\n\t\tfirst_day_of_quarter_format_date as date,\n\t\tlast_day_of_quarter_format_date as date,\n\t\tyear_format_yyyy as integer,\n\t\tiso_year_format_yyyy as integer,\n\t\tops_year_format_yyyy as integer,\n\t\tfirst_day_of_year_format_date as date,\n\t\tlast_day_of_year_format_date as date,\n\t\tyear_is_leap_year_y_n as string,\n\t\tyear_has_53_weeks_y_n as string,\n\t\tiso_year_has_53_weeks_y_n as string,\n\t\tops_year_has_53_weeks_y_n as string,\n\t\tid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> tmpDmClient"
 		}
 	}
 }
