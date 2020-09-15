@@ -205,7 +205,7 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "glb_master_data_tmp",
+			"schema": "glb_master_data_dtm",
 			"table": "dm_client"
 		}
 	}
