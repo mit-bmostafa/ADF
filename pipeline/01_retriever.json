@@ -1,5 +1,5 @@
 {
-	"name": "01_adapter",
+	"name": "01_retriever",
 	"properties": {
 		"description": "Move files from one folder to another folder",
 		"activities": [
@@ -264,7 +264,7 @@
 			},
 			"DestinationStore_Directory": {
 				"type": "String",
-				"defaultValue": "dtm_eng/tmp/100000_95"
+				"defaultValue": "dtm_eng/tmp/100000_95/raw"
 			},
 			"windowStart": {
 				"type": "string"
