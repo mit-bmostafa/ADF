@@ -42,7 +42,11 @@
 								"sink": {
 									"type": "DelimitedTextSink",
 									"storeSettings": {
-										"type": "AzureBlobStorageWriteSettings"
+										"type": "AzureBlobStorageWriteSettings",
+										"copyBehavior": {
+											"value": "@item()",
+											"type": "Expression"
+										}
 									},
 									"formatSettings": {
 										"type": "DelimitedTextWriteSettings",
@@ -50,8 +54,7 @@
 										"fileExtension": ".txt"
 									}
 								},
-								"enableStaging": false,
-								"validateDataConsistency": false
+								"enableStaging": false
 							},
 							"inputs": [
 								{
