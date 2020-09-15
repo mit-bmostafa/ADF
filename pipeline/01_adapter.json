@@ -265,6 +265,12 @@
 			"DestinationStore_Directory": {
 				"type": "String",
 				"defaultValue": "dtm_eng/tmp/100000_95"
+			},
+			"windowStart": {
+				"type": "string"
+			},
+			"windowEnd": {
+				"type": "string"
 			}
 		},
 		"annotations": []
