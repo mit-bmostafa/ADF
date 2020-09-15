@@ -6,12 +6,8 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "raw_loader",
+					"referenceName": "00_sftp_loader",
 					"type": "PipelineReference"
-				},
-				"parameters": {
-					"windowStart": "@trigger().outputs.windowStartTime",
-					"windowEnd": "@trigger().outputs.windowEndTime"
 				}
 			}
 		],
