@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "glbDmClient",
+				"name": "dmClient",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
