@@ -1,0 +1,152 @@
+{
+	"name": "copy_dim_tables",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_ynw",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_ynw",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "reg20_dtm_eng_dtm.@{item().source.table}"
+								},
+								{
+									"name": "Destination",
+									"value": "data/dtm_eng/tmp/100000_95/raw/@{item().destination.fileName}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"validateDataConsistency": false
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_ynw",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().source.table"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_ynw",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_fileName": "@item().destination.fileName"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"table": "dm_client"
+						},
+						"destination": {
+							"fileName": "reg20_dtm_eng_dtmdm_client.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_date"
+						},
+						"destination": {
+							"fileName": "reg20_dtm_eng_dtmdm_date.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_employee"
+						},
+						"destination": {
+							"fileName": "reg20_dtm_eng_dtmdm_employee.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_lob"
+						},
+						"destination": {
+							"fileName": "reg20_dtm_eng_dtmdm_lob.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_media_channel"
+						},
+						"destination": {
+							"fileName": "reg20_dtm_eng_dtmdm_media_channel.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_region"
+						},
+						"destination": {
+							"fileName": "reg20_dtm_eng_dtmdm_region.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_skill"
+						},
+						"destination": {
+							"fileName": "reg20_dtm_eng_dtmdm_skill.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_system"
+						},
+						"destination": {
+							"fileName": "reg20_dtm_eng_dtmdm_system.csv"
+						}
+					}
+				]
+			}
+		},
+		"annotations": []
+	}
+}
