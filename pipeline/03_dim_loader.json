@@ -1,0 +1,136 @@
+{
+	"name": "03_dim_loader",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_5vl",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_5vl",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "glb_master_data_dtm.@{item().source.table}"
+								},
+								{
+									"name": "Destination",
+									"value": "data/dtm_eng/tmp/100000_95/hive/dim/@{item().destination.fileName}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"validateDataConsistency": false
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_5vl",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().source.table"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_5vl",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_fileName": "@item().destination.fileName"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"table": "dm_client"
+						},
+						"destination": {
+							"fileName": "dm_client/dm_client.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_date"
+						},
+						"destination": {
+							"fileName": "dm_date/dm_date.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_lob"
+						},
+						"destination": {
+							"fileName": "dm_lob/dm_lob.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_media_channel"
+						},
+						"destination": {
+							"fileName": "dm_media_channel/dm_media_channel.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_region"
+						},
+						"destination": {
+							"fileName": "dm_region/dm_region.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_system"
+						},
+						"destination": {
+							"fileName": "dm_system/dm_system.csv"
+						}
+					}
+				]
+			}
+		},
+		"annotations": []
+	}
+}
