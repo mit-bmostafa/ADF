@@ -157,7 +157,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "SourceDataset_5vl",
+									"referenceName": "SourceDataset_5vm",
 									"type": "DatasetReference",
 									"parameters": {
 										"cw_table": "@item().source.table"
