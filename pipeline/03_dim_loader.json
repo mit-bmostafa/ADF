@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ForEach_5vl",
+				"name": "Sqlserver_to_hive",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
@@ -80,7 +80,7 @@
 				"type": "HDInsightHive",
 				"dependsOn": [
 					{
-						"activity": "ForEach_5vl",
+						"activity": "Sqlserver_to_hive",
 						"dependencyConditions": [
 							"Succeeded"
 						]
