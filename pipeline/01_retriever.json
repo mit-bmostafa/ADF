@@ -260,11 +260,11 @@
 			},
 			"DestinationStore_Location": {
 				"type": "String",
-				"defaultValue": "data"
+				"defaultValue": "hive"
 			},
 			"DestinationStore_Directory": {
 				"type": "String",
-				"defaultValue": "dtm_eng/tmp/100000_95/raw"
+				"defaultValue": "warehouse/reg20_dtm_eng_tmp/raw_conversation_tbl"
 			},
 			"windowStart": {
 				"type": "string"
