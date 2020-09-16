@@ -19,8 +19,8 @@
 					"value": "@dataset().cw_fileName",
 					"type": "Expression"
 				},
-				"folderPath": "dtm_eng/tmp/100000_95/hive/dim",
-				"container": "data"
+				"folderPath": "reg20_dtm_eng_tmp/dim",
+				"container": "hive"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
