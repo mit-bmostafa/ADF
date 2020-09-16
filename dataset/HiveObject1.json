@@ -1,0 +1,12 @@
+{
+	"name": "HiveObject1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lkshiveserver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "HiveObject",
+		"schema": []
+	}
+}
