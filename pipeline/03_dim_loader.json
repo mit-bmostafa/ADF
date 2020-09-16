@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Sqlserver_to_hive",
+				"name": "sqlserver_to_hive",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
@@ -80,7 +80,7 @@
 				"type": "HDInsightHive",
 				"dependsOn": [
 					{
-						"activity": "Sqlserver_to_hive",
+						"activity": "sqlserver_to_hive",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -104,6 +104,68 @@
 				"linkedServiceName": {
 					"referenceName": "lkshdinsight",
 					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "hive_to_sqlserver",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_5vl_copy1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "glb_master_data_dtm.@{item().source.table}"
+								},
+								{
+									"name": "Destination",
+									"value": "data/dtm_eng/tmp/100000_95/hive/dim/@{item().destination.fileName}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "HiveSource",
+									"query": "select * from reg20_dtm_eng_dtm.@item().source.table"
+								},
+								"sink": {
+									"type": "AzureSqlSink"
+								},
+								"enableStaging": false,
+								"validateDataConsistency": false
+							},
+							"inputs": [
+								{
+									"referenceName": "HiveObject1",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "SourceDataset_5vl",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().source.table"
+									}
+								}
+							]
+						}
+					]
 				}
 			}
 		],
