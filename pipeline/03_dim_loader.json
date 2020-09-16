@@ -109,7 +109,14 @@
 			{
 				"name": "hive_to_sqlserver",
 				"type": "ForEach",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "dtm_dim_loader",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
@@ -141,7 +148,10 @@
 							"typeProperties": {
 								"source": {
 									"type": "HiveSource",
-									"query": "select * from reg20_dtm_eng_dtm.@item().source.table"
+									"query": {
+										"value": "@concat('select * from ', item().source.table)",
+										"type": "Expression"
+									}
 								},
 								"sink": {
 									"type": "AzureSqlSink"
