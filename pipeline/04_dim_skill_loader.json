@@ -1,0 +1,32 @@
+{
+	"name": "04_dim_skill_loader",
+	"properties": {
+		"activities": [
+			{
+				"name": "hive_tmp_to_dtm",
+				"type": "HDInsightHive",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"scriptPath": "hive/scripts/reg20_dtm_eng_dtm_dim_dm_skill.hql",
+					"scriptLinkedService": {
+						"referenceName": "lksazureblobstorage",
+						"type": "LinkedServiceReference"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "lkshdinsight",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
