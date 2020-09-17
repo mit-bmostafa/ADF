@@ -76,7 +76,7 @@
 						"referenceName": "SourceDataset_5vm",
 						"type": "DatasetReference",
 						"parameters": {
-							"cw_table": "reg20_dtm_eng_dtm.dm_skill"
+							"cw_table": "dm_skill"
 						}
 					}
 				]
