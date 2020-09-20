@@ -18,7 +18,7 @@
 			}
 		},
 		"annotations": [],
-		"type": "Binary",
+		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
@@ -34,7 +34,11 @@
 					"value": "@{dataset().Container}",
 					"type": "Expression"
 				}
-			}
-		}
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
 	}
 }
