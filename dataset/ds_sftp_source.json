@@ -1,5 +1,5 @@
 {
-	"name": "sftp_source_ds",
+	"name": "ds_sftp_source",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lksftpwinserver",
