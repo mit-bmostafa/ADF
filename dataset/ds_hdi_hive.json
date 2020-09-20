@@ -1,5 +1,5 @@
 {
-	"name": "HiveObject1",
+	"name": "ds_hdi_hive",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lkshiveserver",
