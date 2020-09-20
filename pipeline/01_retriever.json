@@ -4,12 +4,12 @@
 		"description": "Move files from one folder to another folder",
 		"activities": [
 			{
-				"name": "GetFileList",
+				"name": "Get_data_in_files_list",
 				"description": "Get the list of file",
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
-						"activity": "sftp_poller",
+						"activity": "Sftp_poller",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -25,7 +25,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "BinaryDataSource_Folder",
+						"referenceName": "ds_wabs_data_in_Folder",
 						"type": "DatasetReference",
 						"parameters": {
 							"Container": {
@@ -51,12 +51,12 @@
 				}
 			},
 			{
-				"name": "ForEachFile",
+				"name": "Loop_data_in_files",
 				"description": "Iterate each file, and move them one by one.",
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "FilterFiles",
+						"activity": "Filter_files",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -106,7 +106,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "BinaryDataSource_File",
+									"referenceName": "ds_wabs_data_in_File",
 									"type": "DatasetReference",
 									"parameters": {
 										"Container": {
@@ -149,12 +149,12 @@
 				}
 			},
 			{
-				"name": "FilterFiles",
+				"name": "Filter_files",
 				"description": "Only files will be selected, the source-folders will not be selected.",
 				"type": "Filter",
 				"dependsOn": [
 					{
-						"activity": "GetFileList",
+						"activity": "Get_data_in_files_list",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -163,17 +163,17 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('GetFileList').output.childItems",
+						"value": "@activity('Get_data_in_files_list').output.childItems",
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@equals(item().type, 'File')",
+						"value": "@and(equals(item().type, 'File'),startswith(item().name, 'ConversationReport') )",
 						"type": "Expression"
 					}
 				}
 			},
 			{
-				"name": "sftp_poller",
+				"name": "Sftp_poller",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -243,7 +243,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "wabs_raw_in_ds",
+						"referenceName": "ds_wabs_data_in",
 						"type": "DatasetReference"
 					}
 				]
