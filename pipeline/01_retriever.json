@@ -126,7 +126,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "BinaryDataDestination",
+									"referenceName": "ds_wabs_warehouse_tmp_raw",
 									"type": "DatasetReference",
 									"parameters": {
 										"Container": {
@@ -237,7 +237,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "sftp_source_ds",
+						"referenceName": "ds_sftp_source",
 						"type": "DatasetReference"
 					}
 				],
