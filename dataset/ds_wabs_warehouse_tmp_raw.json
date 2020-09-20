@@ -8,13 +8,16 @@
 		},
 		"parameters": {
 			"Container": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "hive"
 			},
 			"Directory": {
-				"type": "String"
+				"type": "String",
+				"defaultValue": "warehouse/reg20_dtm_eng_tmp/raw_conversation_tbl"
 			},
 			"filename": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "@item().name"
 			}
 		},
 		"annotations": [],
