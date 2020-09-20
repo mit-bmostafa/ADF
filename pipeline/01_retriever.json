@@ -71,7 +71,7 @@
 					"batchCount": 20,
 					"activities": [
 						{
-							"name": "CopyAFile",
+							"name": "data_to_hive",
 							"description": "Copy a file from the source store to the destination store.",
 							"type": "Copy",
 							"dependsOn": [],
@@ -96,9 +96,14 @@
 									"recursive": false
 								},
 								"sink": {
-									"type": "BinarySink",
+									"type": "DelimitedTextSink",
 									"storeSettings": {
 										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
 									}
 								},
 								"enableStaging": false,
