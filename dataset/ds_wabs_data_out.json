@@ -1,5 +1,5 @@
 {
-	"name": "wabs_raw_out_ds",
+	"name": "ds_wabs_data_out",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lksazureblobstorage",
