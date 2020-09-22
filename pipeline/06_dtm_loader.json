@@ -25,6 +25,37 @@
 					"referenceName": "lkshdinsight",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "stg_to_dtm",
+				"type": "HDInsightHive",
+				"dependsOn": [
+					{
+						"activity": "raw_to_stg",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"scriptPath": "hive/scripts/reg20_dtm_eng_dtm_ft_call.hql",
+					"scriptLinkedService": {
+						"referenceName": "lksazureblobstorage",
+						"type": "LinkedServiceReference"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "lkshdinsight",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []
