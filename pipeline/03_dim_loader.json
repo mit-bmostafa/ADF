@@ -235,6 +235,14 @@
 						"destination": {
 							"fileName": "dm_system/dm_system.csv"
 						}
+					},
+					{
+						"source": {
+							"table": "dm_time"
+						},
+						"destination": {
+							"fileName": "dm_time/dm_time.csv"
+						}
 					}
 				]
 			}
