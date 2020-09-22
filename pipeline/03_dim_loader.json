@@ -166,7 +166,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "HiveObject1",
+									"referenceName": "ds_hdi_hive",
 									"type": "DatasetReference"
 								}
 							],
