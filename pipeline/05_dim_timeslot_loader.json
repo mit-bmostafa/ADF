@@ -48,21 +48,35 @@
 				"typeProperties": {
 					"source": {
 						"type": "HiveSource",
-						"query": "select * from reg20_dtm_eng_dtm.dm_skill"
+						"query": "select * from reg20_dtm_eng_dtm.dm_time_slot"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "truncate table reg20_dtm_eng_dtm.dm_skill;",
+						"preCopyScript": "truncate table reg20_dtm_eng_dtm.dm_time_slot;",
 						"disableMetricsCollection": false
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
+				"inputs": [
+					{
+						"referenceName": "ds_hdi_hive",
+						"type": "DatasetReference"
+					}
+				],
 				"outputs": [
 					{
 						"referenceName": "SourceDataset_5vm",
 						"type": "DatasetReference",
 						"parameters": {
-							"cw_table": "dm_skill"
+							"cw_table": "dm_time_slot"
 						}
 					}
 				]
