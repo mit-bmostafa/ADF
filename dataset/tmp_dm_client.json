@@ -1,0 +1,16 @@
+{
+	"name": "tmp_dm_client",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lkssparkserver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SparkObject",
+		"schema": [],
+		"typeProperties": {
+			"schema": "reg20_dtm_eng_tmp",
+			"table": "dm_client"
+		}
+	}
+}
