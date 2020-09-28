@@ -1,5 +1,5 @@
 {
-	"name": "BinaryDataDestination",
+	"name": "wabs_data_destination",
 	"properties": {
 		"description": "It describes the destination store.",
 		"linkedServiceName": {
