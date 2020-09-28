@@ -4,22 +4,7 @@
 		"description": "Source files selection based on trigger start/end",
 		"annotations": [],
 		"runtimeState": "Stopped",
-		"pipelines": [
-			{
-				"pipelineReference": {
-					"referenceName": "01_adapter",
-					"type": "PipelineReference"
-				},
-				"parameters": {
-					"SourceStore_Location": "data",
-					"SourceStore_Directory": "dtm_eng/in/100000_95a",
-					"DestinationStore_Location": "data",
-					"DestinationStore_Directory": "dtm_eng/tmp/100000_95",
-					"windowStart": "@trigger().outputs.windowStartTime",
-					"windowEnd": "@trigger().outputs.windowEndTime"
-				}
-			}
-		],
+		"pipelines": [],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
