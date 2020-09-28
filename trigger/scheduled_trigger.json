@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Source files selection based on trigger start/end",
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
@@ -23,18 +23,10 @@
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Day",
-				"interval": 1,
+				"frequency": "Minute",
+				"interval": 15,
 				"startTime": "2020-09-14T18:14:00.000Z",
-				"timeZone": "UTC",
-				"schedule": {
-					"minutes": [
-						0
-					],
-					"hours": [
-						22
-					]
-				}
+				"timeZone": "UTC"
 			}
 		}
 	}
