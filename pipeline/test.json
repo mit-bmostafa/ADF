@@ -399,7 +399,7 @@
 						"referenceName": "wabs_reg20_dtm_emg_tmp_raw",
 						"type": "DatasetReference"
 					},
-					"enableLogging": true,
+					"enableLogging": false,
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
 						"recursive": true
