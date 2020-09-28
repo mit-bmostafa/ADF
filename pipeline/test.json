@@ -329,7 +329,8 @@
 							"wildcardFileName": "*"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 0
 						}
 					},
 					"sink": {
@@ -343,8 +344,9 @@
 							"fileExtension": ".csv"
 						}
 					},
-					"enableStaging": true,
-					"stagingSettings": {
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"logStorageSettings": {
 						"linkedServiceName": {
 							"referenceName": "lksazureblobstorage",
 							"type": "LinkedServiceReference"
