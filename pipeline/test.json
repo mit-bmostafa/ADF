@@ -295,13 +295,26 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "/Raw/"
+					},
+					{
+						"name": "Destination",
+						"value": "data/dtm_eng/in/100000_95/"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "SftpReadSettings",
 							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@pipeline().parameters.windowStart",
+								"type": "Expression"
+							},
 							"modifiedDatetimeEnd": {
 								"value": "@pipeline().parameters.windowEnd",
 								"type": "Expression"
@@ -311,11 +324,43 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".csv"
+						}
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "lksazureblobstorage",
+							"type": "LinkedServiceReference"
+						},
+						"path": "data/out/logs"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "sftp_source_ds",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "wabs_raw_in_ds",
 						"type": "DatasetReference"
 					}
 				]
@@ -345,6 +390,12 @@
 			"ArchiveStore_Directory": {
 				"type": "string",
 				"defaultValue": "dtm_eng/out/archive/100000_95"
+			},
+			"windowStart": {
+				"type": "string"
+			},
+			"windowEnd": {
+				"type": "string"
 			}
 		},
 		"annotations": []
