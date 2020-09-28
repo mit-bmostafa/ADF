@@ -60,7 +60,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@equals(split(item().name, '-')[0], 'ConversationReport')",
+						"value": "@equals(item().name, 'ConversationReport-Majorel-20200825.csv')",
 						"type": "Expression"
 					}
 				}
@@ -146,7 +146,7 @@
 											"type": "Expression"
 										},
 										"Directory": {
-											"value": "@concat(pipeline().parameters.ArchiveStore_Directory,'/test')",
+											"value": "@concat(pipeline().parameters.ArchiveStore_Directory,'/', substring(split(split(item().name, '-')[2], '.')[0], 0, 6))",
 											"type": "Expression"
 										},
 										"filename": "@item().name"
