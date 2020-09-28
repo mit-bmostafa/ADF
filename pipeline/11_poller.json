@@ -8,7 +8,7 @@
 				"type": "GetMetadata",
 				"dependsOn": [
 					{
-						"activity": "112_sftp_poller",
+						"activity": "12_sftp_poller",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -291,12 +291,12 @@
 				}
 			},
 			{
-				"name": "112_sftp_poller",
+				"name": "12_sftp_poller",
 				"description": "Retrieve files via SFTP",
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "111_clean_hive_tmp_raw",
+						"activity": "11_clean_hive_tmp_raw",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -383,7 +383,7 @@
 				]
 			},
 			{
-				"name": "111_clean_hive_tmp_raw",
+				"name": "11_clean_hive_tmp_raw",
 				"type": "Delete",
 				"dependsOn": [],
 				"policy": {
