@@ -107,7 +107,14 @@
 										"type": "BinaryReadSettings"
 									}
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"dataIntegrationUnits": 0
 							},
 							"inputs": [
 								{
@@ -126,6 +133,23 @@
 											"value": "@item().name",
 											"type": "Expression"
 										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "BinaryDataDestination",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.ArchiveStore_Location",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.ArchiveStore_Directory",
+											"type": "Expression"
+										},
+										"filename": "@item().name"
 									}
 								}
 							]
