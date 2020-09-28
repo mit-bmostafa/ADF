@@ -67,7 +67,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@equals(item().name, 'ConversationReport-Majorel-20200901.csv')",
+						"value": "@equals(item().name, 'ConversationReport-Majorel-20200902.csv')",
 						"type": "Expression"
 					}
 				}
