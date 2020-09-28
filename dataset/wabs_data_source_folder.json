@@ -1,5 +1,5 @@
 {
-	"name": "BinaryDataSource_Folder",
+	"name": "wabs_data_source_folder",
 	"properties": {
 		"description": "It describes the folder in the data source store.",
 		"linkedServiceName": {
