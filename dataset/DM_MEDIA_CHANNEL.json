@@ -1,0 +1,30 @@
+{
+	"name": "DM_MEDIA_CHANNEL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazuresqldatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "media_channel_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "media_channel",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "glb_master_data_dtm",
+			"table": "dm_media_channel"
+		}
+	}
+}

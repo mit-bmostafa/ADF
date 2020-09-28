@@ -1,0 +1,30 @@
+{
+	"name": "TMP_DM_MEDIA_CHANNEL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazuresqldatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "media_channel_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "media_channel",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "reg20_dtm_eng_tmp",
+			"table": "TMP_DM_MEDIA_CHANNEL"
+		}
+	}
+}
