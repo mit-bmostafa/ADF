@@ -146,7 +146,7 @@
 											"type": "Expression"
 										},
 										"Directory": {
-											"value": "@pipeline().parameters.ArchiveStore_Directory",
+											"value": "@concat(pipeline().parameters.ArchiveStore_Directory,'/test')",
 											"type": "Expression"
 										},
 										"filename": "@item().name"
