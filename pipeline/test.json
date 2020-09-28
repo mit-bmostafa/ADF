@@ -142,6 +142,22 @@
 			"SourceStore_Directory": {
 				"type": "string",
 				"defaultValue": "dtm_eng/in/100000_95"
+			},
+			"DestinationStore_Location": {
+				"type": "string",
+				"defaultValue": "data"
+			},
+			"DestinationStore_Directory": {
+				"type": "string",
+				"defaultValue": "dtm_eng/tmp/100000_95"
+			},
+			"ArchiveStore_Location": {
+				"type": "string",
+				"defaultValue": "data"
+			},
+			"ArchiveStore_Directory": {
+				"type": "string",
+				"defaultValue": "dtm_eng/out/archive/100000_95"
 			}
 		},
 		"annotations": []
