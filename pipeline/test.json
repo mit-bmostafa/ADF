@@ -4,7 +4,7 @@
 		"description": "test",
 		"activities": [
 			{
-				"name": "Get Metadata1",
+				"name": "GetFileList",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -18,11 +18,24 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "BinaryDataSource_Folder",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.SourceStore_Location",
+								"type": "Expression"
+							},
+							"Directory": {
+								"value": "@pipeline().parameters.SourceStore_Directory",
+								"type": "Expression"
+							}
+						}
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
-						"type": "AzureBlobStorageReadSettings"
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true
 					},
 					"formatSettings": {
 						"type": "BinaryReadSettings"
@@ -31,13 +44,13 @@
 			}
 		],
 		"parameters": {
-			"@pipeline().parameters.SourceStore_Directory": {
-				"type": "string",
-				"defaultValue": "dtm_eng/in/100000_95a"
-			},
-			"@pipeline().parameters.SourceStore_Location": {
+			"SourceStore_Location": {
 				"type": "string",
 				"defaultValue": "data"
+			},
+			"SourceStore_Directory": {
+				"type": "string",
+				"defaultValue": "dtm_eng/in/100000_95a"
 			}
 		},
 		"annotations": []
