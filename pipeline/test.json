@@ -67,7 +67,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@and(equals(item().type, 'File'),startswith(item().name, 'ConversationReport') )",
+						"value": "@equals(item().name, 'ConversationReport-Majorel-20200902.csv')",
 						"type": "Expression"
 					}
 				}
@@ -294,7 +294,14 @@
 				"name": "PullFiles",
 				"description": "Retrieve files via SFTP",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "clean_raw",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -411,11 +418,11 @@
 			},
 			"DestinationStore_Location": {
 				"type": "string",
-				"defaultValue": "data"
+				"defaultValue": "hive"
 			},
 			"DestinationStore_Directory": {
 				"type": "string",
-				"defaultValue": "dtm_eng/tmp/100000_95"
+				"defaultValue": "warehouse/reg20_dtm_eng_tmp/raw_conversation_tbl"
 			},
 			"ArchiveStore_Location": {
 				"type": "string",
