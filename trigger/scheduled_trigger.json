@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Source files selection based on trigger start/end",
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
@@ -12,7 +12,7 @@
 				},
 				"parameters": {
 					"SourceStore_Location": "data",
-					"SourceStore_Directory": "dtm_eng/in/100000_95",
+					"SourceStore_Directory": "dtm_eng/in/100000_95a",
 					"DestinationStore_Location": "data",
 					"DestinationStore_Directory": "dtm_eng/tmp/100000_95",
 					"windowStart": "@trigger().outputs.windowStartTime",
