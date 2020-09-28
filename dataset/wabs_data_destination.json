@@ -1,7 +1,7 @@
 {
-	"name": "BinaryDataSource_Folder",
+	"name": "wabs_data_destination",
 	"properties": {
-		"description": "It describes the folder in the data source store.",
+		"description": "It describes the destination store.",
 		"linkedServiceName": {
 			"referenceName": "lksazureblobstorage",
 			"type": "LinkedServiceReference"
@@ -12,6 +12,9 @@
 			},
 			"Directory": {
 				"type": "String"
+			},
+			"filename": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
