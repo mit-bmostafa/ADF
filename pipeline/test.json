@@ -50,7 +50,7 @@
 			},
 			"SourceStore_Directory": {
 				"type": "string",
-				"defaultValue": "dtm_eng/in/100000_95a"
+				"defaultValue": "dtm_eng/in/100000_95"
 			}
 		},
 		"annotations": []
