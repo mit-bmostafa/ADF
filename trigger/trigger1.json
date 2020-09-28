@@ -1,0 +1,33 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipeline": {
+			"pipelineReference": {
+				"referenceName": "01_adapter",
+				"type": "PipelineReference"
+			},
+			"parameters": {
+				"SourceStore_Location": "data",
+				"SourceStore_Directory": "dtm_eng/in/100000_95a",
+				"DestinationStore_Location": "data",
+				"DestinationStore_Directory": "dtm_eng/tmp/100000_95a",
+				"windowStart": "@trigger().outputs.windowStartTime",
+				"windowEnd": "@trigger().outputs.windowEndTime"
+			}
+		},
+		"type": "TumblingWindowTrigger",
+		"typeProperties": {
+			"frequency": "Minute",
+			"interval": 15,
+			"startTime": "2020-09-28T12:12:00.000Z",
+			"delay": "00:00:00",
+			"maxConcurrency": 50,
+			"retryPolicy": {
+				"intervalInSeconds": 30
+			},
+			"dependsOn": []
+		}
+	}
+}
