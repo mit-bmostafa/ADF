@@ -43,7 +43,7 @@
 				}
 			},
 			{
-				"name": "FileListFilter",
+				"name": "FilterFiles",
 				"type": "Filter",
 				"dependsOn": [
 					{
@@ -63,6 +63,19 @@
 						"value": "@equals(split(item().name, '-')[0], 'ConversationReport')",
 						"type": "Expression"
 					}
+				}
+			},
+			{
+				"name": "ForEachFile",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('FilterFiles').output.value",
+						"type": "Expression"
+					},
+					"batchCount": 20
 				}
 			}
 		],
