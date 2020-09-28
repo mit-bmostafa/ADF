@@ -41,6 +41,29 @@
 						"type": "BinaryReadSettings"
 					}
 				}
+			},
+			{
+				"name": "FileListFilter",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "GetFileList",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('GetFileList').output.childItems",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@equals(split(item().name, '-')[0], 'ConversationReport')",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
