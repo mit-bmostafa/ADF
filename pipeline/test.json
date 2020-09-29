@@ -67,6 +67,10 @@
 										"Directory": {
 											"value": "@concat('warehouse/reg20_dtm_eng_tmp/dim/', item().destination.directory)",
 											"type": "Expression"
+										},
+										"filename": {
+											"value": "@item().source.filename",
+											"type": "Expression"
 										}
 									}
 								}
