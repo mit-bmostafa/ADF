@@ -1,0 +1,85 @@
+{
+	"name": "test",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.ref",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "copy_ref_file",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "wabs_data_source_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": "data",
+										"Directory": "dtm_eng/ref",
+										"filename": {
+											"value": "@item().source.filename",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "wabs_raw_out_ds",
+									"type": "DatasetReference"
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"ref": {
+				"type": "array",
+				"defaultValue": "[{source: {filename: 'af_mapping_skill_genesys_skill'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_mapping_skill_genesys_skill'}},{source: {filename: 'af_skill'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_skill'}},{source: {filename: 'af_activity'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_activity'}},{source: {filename: 'af_mapping_skill_activity'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_mapping_skill_activity'}},{source: {filename: 'af_mapping_activity_sublob'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_mapping_activity_sublob'}},{source: {filename: 'af_mapping_company_siop_company'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_mapping_company_siop_company'}},{source: {filename: 'af_mapping_system_siop_system'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_mapping_system_siop_system'}}]"
+			}
+		},
+		"annotations": []
+	}
+}
