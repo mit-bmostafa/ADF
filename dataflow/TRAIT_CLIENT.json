@@ -1,0 +1,20 @@
+{
+	"name": "TRAIT_CLIENT",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "HV_TMP_DM_CLIENT",
+						"type": "DatasetReference"
+					},
+					"name": "TMPCLIENT"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> TMPCLIENT"
+		}
+	}
+}
