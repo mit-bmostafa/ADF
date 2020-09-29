@@ -26,7 +26,7 @@
 					"name": "FILTERID"
 				}
 			],
-			"script": "source(output(\n\t\tid as string,\n\t\tclient_cd as string,\n\t\tclient as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false) ~> TMPCLIENT\nTMPCLIENT filter(id=='-4'||id=='-3'||id=='-2'||id=='95'||id=='-1'||id=='96') ~> FILTERID\nFILTERID sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['DM_CLIENT.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> DMCLIENT"
+			"script": "source(output(\n\t\tid as string,\n\t\tclient_cd as string,\n\t\tclient as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false) ~> TMPCLIENT\nTMPCLIENT filter(id=='-4'||id=='-3'||id=='-2'||id=='95'||id=='-1'||id=='96') ~> FILTERID\nFILTERID sink(allowSchemaDrift: true,\n\tvalidateSchema: true,\n\tpartitionFileNames:['DM_CLIENT.csv'],\n\tmapColumn(\n\t\tid,\n\t\tclient_cd,\n\t\tclient,\n\t\ttype\n\t),\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> DMCLIENT"
 		}
 	}
 }
