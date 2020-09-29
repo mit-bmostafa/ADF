@@ -86,7 +86,7 @@
 				"defaultValue": [
 					{
 						"source": {
-							"filename": "af_activity"
+							"filename": "af_activity.csv"
 						},
 						"destination": {
 							"directory": "tmp_af_activity"
