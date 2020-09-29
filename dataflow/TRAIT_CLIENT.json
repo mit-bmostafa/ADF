@@ -26,7 +26,7 @@
 					"name": "FILTERID"
 				}
 			],
-			"script": "source(output(\n\t\tid as string,\n\t\tclient_cd as string,\n\t\tclient as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false,\n\twildcardPaths:[' warehouse / reg20_dtm_eng_tmp / dim/TMP_DM_CLIENT.csv']) ~> TMPCLIENT\nTMPCLIENT filter(\r\nid=='-4'||id=='-3'||id=='-2'||id=='95'||id=='-1'||id=='96') ~> FILTERID\nFILTERID sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> DMCLIENT"
+			"script": "source(output(\n\t\tid as string,\n\t\tclient_cd as string,\n\t\tclient as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false) ~> TMPCLIENT\nTMPCLIENT filter(\r\nid=='-4'||id=='-3'||id=='-2'||id=='95'||id=='-1'||id=='96') ~> FILTERID\nFILTERID sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> DMCLIENT"
 		}
 	}
 }
