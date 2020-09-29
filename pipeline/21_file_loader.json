@@ -1,9 +1,9 @@
 {
-	"name": "test",
+	"name": "21_file_loader",
 	"properties": {
 		"activities": [
 			{
-				"name": "ForEach1",
+				"name": "21_1_loop_files",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
@@ -158,6 +158,9 @@
 					}
 				]
 			}
+		},
+		"folder": {
+			"name": "02_dim_loader"
 		},
 		"annotations": []
 	}
