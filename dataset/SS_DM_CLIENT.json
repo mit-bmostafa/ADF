@@ -1,0 +1,34 @@
+{
+	"name": "SS_DM_CLIENT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazuresqldatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "client_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "client",
+				"type": "varchar"
+			},
+			{
+				"name": "type",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "reg20_dtm_eng_dtm",
+			"table": "dm_client"
+		}
+	}
+}
