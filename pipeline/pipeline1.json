@@ -385,6 +385,7 @@
 							{
 								"source": {
 									"name": "id",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
@@ -395,7 +396,7 @@
 							},
 							{
 								"source": {
-									"name": "Prop_1",
+									"name": "client_cd",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -407,7 +408,7 @@
 							},
 							{
 								"source": {
-									"name": "Not applicable2",
+									"name": "client",
 									"type": "String",
 									"physicalType": "String"
 								},
@@ -419,7 +420,7 @@
 							},
 							{
 								"source": {
-									"name": "Not applicable3",
+									"name": "type",
 									"type": "String",
 									"physicalType": "String"
 								},
