@@ -345,7 +345,7 @@
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "DM_CLIENT",
 				"type": "Copy",
 				"dependsOn": [
 					{
