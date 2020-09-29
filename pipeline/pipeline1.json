@@ -368,15 +368,15 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"prefix": "DM_CLIENT"
+							"recursive": true
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
-						"type": "AzureSqlSink"
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate"
 					},
 					"enableStaging": false,
 					"translator": {
@@ -390,7 +390,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "BL_DM_CLIENT",
+						"referenceName": "HV_DM_CLIENT",
 						"type": "DatasetReference"
 					}
 				],
