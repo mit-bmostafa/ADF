@@ -76,6 +76,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"cw_items": {
+				"type": "array"
+			}
+		},
 		"folder": {
 			"name": "02_dim_loader"
 		},
