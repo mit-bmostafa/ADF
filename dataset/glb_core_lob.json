@@ -1,0 +1,35 @@
+{
+	"name": "glb_core_lob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazuresqldatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "lob_cd",
+				"type": "varchar"
+			},
+			{
+				"name": "lob",
+				"type": "varchar"
+			},
+			{
+				"name": "fk_client_id",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "glb_master_data_core",
+			"table": "lob"
+		}
+	}
+}
