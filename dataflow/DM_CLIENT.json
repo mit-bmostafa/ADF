@@ -1,0 +1,28 @@
+{
+	"name": "DM_CLIENT",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "HV_DM_CLIENT",
+						"type": "DatasetReference"
+					},
+					"name": "DMCLIENT"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SS_DM_CLIENT",
+						"type": "DatasetReference"
+					},
+					"name": "SSDMCLIENT"
+				}
+			],
+			"transformations": [],
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> DMCLIENT\nDMCLIENT sink(input(\n\t\tid as integer,\n\t\tclient_cd as string,\n\t\tclient as string,\n\t\ttype as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SSDMCLIENT"
+		}
+	}
+}
