@@ -10,8 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "DM_CLIENT.csv",
-				"folderPath": "warehouse/reg20_dtm_eng_dtm/dim",
+				"folderPath": "warehouse/reg20_dtm_eng_dtm/dim/dm_client",
 				"container": "hive"
 			},
 			"columnDelimiter": ",",
