@@ -37,14 +37,9 @@
 									}
 								},
 								"sink": {
-									"type": "DelimitedTextSink",
+									"type": "BinarySink",
 									"storeSettings": {
 										"type": "AzureBlobStorageWriteSettings"
-									},
-									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
 									}
 								},
 								"enableStaging": false
@@ -65,8 +60,16 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "wabs_raw_out_ds",
-									"type": "DatasetReference"
+									"referenceName": "wabs_data_destination",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": "hive",
+										"Directory": "warehouse/reg20_dtm_eng_tmp/dim/",
+										"filename": {
+											"value": "@item().destination.directory",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
@@ -77,7 +80,7 @@
 		"parameters": {
 			"ref": {
 				"type": "array",
-				"defaultValue": "[{source: {filename: 'af_mapping_skill_genesys_skill'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_mapping_skill_genesys_skill'}},{source: {filename: 'af_skill'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_skill'}},{source: {filename: 'af_activity'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_activity'}},{source: {filename: 'af_mapping_skill_activity'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_mapping_skill_activity'}},{source: {filename: 'af_mapping_activity_sublob'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_mapping_activity_sublob'}},{source: {filename: 'af_mapping_company_siop_company'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_mapping_company_siop_company'}},{source: {filename: 'af_mapping_system_siop_system'}, destination: {table: 'reg20_dtm_eng_tmp.tmp_af_mapping_system_siop_system'}}]"
+				"defaultValue": " [{source: {filename: 'af_activity'}, destination: {directory: 'tmp_af_activity'}}]"
 			}
 		},
 		"annotations": []
