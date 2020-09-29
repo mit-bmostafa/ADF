@@ -1,0 +1,24 @@
+{
+	"name": "HV_TMP_DM_CLIENT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazureblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "TMP_DM_CLIENT.csv",
+				"folderPath": "warehouse/reg20_dtm_eng_tmp/dim",
+				"container": "hive"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
