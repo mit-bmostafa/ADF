@@ -64,9 +64,8 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"Container": "hive",
-										"Directory": "warehouse/reg20_dtm_eng_tmp/dim/",
-										"filename": {
-											"value": "@item().destination.directory",
+										"Directory": {
+											"value": "@concat('warehouse/reg20_dtm_eng_tmp/dim/', item().destination.directory)",
 											"type": "Expression"
 										}
 									}
@@ -80,7 +79,16 @@
 		"parameters": {
 			"ref": {
 				"type": "array",
-				"defaultValue": " [{source: {filename: 'af_activity'}, destination: {directory: 'tmp_af_activity'}}]"
+				"defaultValue": [
+					{
+						"source": {
+							"filename": "af_activity"
+						},
+						"destination": {
+							"directory": "tmp_af_activity"
+						}
+					}
+				]
 			}
 		},
 		"annotations": []
