@@ -14,7 +14,7 @@
 					},
 					"activities": [
 						{
-							"name": "Copy_5vl",
+							"name": "23_1_1_sqlserver_to_hive",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -55,7 +55,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "sqlserver_glb_master_data_dtm",
+									"referenceName": "sqlserver_glb_master_data_core",
 									"type": "DatasetReference",
 									"parameters": {
 										"cw_table": "@item().source.table"
@@ -64,7 +64,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "wabs_warehouse_reg20_dtm",
+									"referenceName": "wabs_warehouse_reg20_core",
 									"type": "DatasetReference",
 									"parameters": {
 										"cw_fileName": "@item().destination.fileName"
