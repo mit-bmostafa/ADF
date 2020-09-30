@@ -85,7 +85,7 @@
 							"table": "lob"
 						},
 						"destination": {
-							"fileName": "lob.csv"
+							"fileName": "lob/lob.csv"
 						}
 					},
 					{
@@ -93,7 +93,7 @@
 							"table": "sub_lob"
 						},
 						"destination": {
-							"fileName": "sub_lob.csv"
+							"fileName": "sub_lob/sub_lob.csv"
 						}
 					},
 					{
@@ -101,7 +101,7 @@
 							"table": "system"
 						},
 						"destination": {
-							"fileName": "system.csv"
+							"fileName": "system/system.csv"
 						}
 					},
 					{
@@ -109,7 +109,7 @@
 							"table": "company"
 						},
 						"destination": {
-							"fileName": "company.csv"
+							"fileName": "company/company.csv"
 						}
 					}
 				]
