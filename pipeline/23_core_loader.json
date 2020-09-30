@@ -101,7 +101,7 @@
 												"typeProperties": {
 													"variableName": "core_query",
 													"value": {
-														"value": "@concat(concat('select * from glb_msater_data_core.', item().source.table), ' where fk_client_id=98 or id<0')",
+														"value": "@concat(concat('select * from glb_msater_data_core.', item().source.table), ' where lob like \"%Engie%\" or id<0')",
 														"type": "Expression"
 													}
 												}
@@ -120,6 +120,24 @@
 													"variableName": "core_query",
 													"value": {
 														"value": "@concat(concat('select * from glb_msater_data_core.', item().source.table), ' where sub_lob_cd like \"%Engie%\" or id<0')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"value": "'system'",
+										"activities": [
+											{
+												"name": "set_system_query",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "@concat(concat('select * from glb_msater_data_core.', item().source.table), ' where owner like \"%Engie%\" or id<0')",
 														"type": "Expression"
 													}
 												}
