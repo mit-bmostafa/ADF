@@ -162,6 +162,12 @@
 				"defaultValue": "''"
 			}
 		},
+		"variables": {
+			"core_query": {
+				"type": "String",
+				"defaultValue": "''"
+			}
+		},
 		"folder": {
 			"name": "02_dim_loader"
 		},
