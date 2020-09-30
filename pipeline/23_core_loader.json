@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "sqlserver_to_hive",
+				"name": "23_1_loop_glb_tables",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
@@ -78,7 +78,41 @@
 		],
 		"parameters": {
 			"cw_items": {
-				"type": "array"
+				"type": "array",
+				"defaultValue": [
+					{
+						"source": {
+							"table": "lob"
+						},
+						"destination": {
+							"fileName": "lob.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "sub_lob"
+						},
+						"destination": {
+							"fileName": "sub_lob.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "system"
+						},
+						"destination": {
+							"fileName": "system.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "company"
+						},
+						"destination": {
+							"fileName": "company.csv"
+						}
+					}
+				]
 			}
 		},
 		"folder": {
