@@ -97,12 +97,34 @@
 												"name": "set_lob_query",
 												"type": "SetVariable",
 												"dependsOn": [],
-												"userProperties": []
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "@concat(concat('select * from glb_msater_data_core.', item().source.table), ' where fk_client_id=98 or id<0')",
+														"type": "Expression"
+													}
+												}
 											}
 										]
 									},
 									{
-										"value": "'sub_lob'"
+										"value": "'sub_lob'",
+										"activities": [
+											{
+												"name": "set_sub_lob_query",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "@concat(concat('select * from glb_msater_data_core.', item().source.table), ' where sub_lob_cd like \"%Engie%\" or id<0')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
 									}
 								],
 								"defaultActivities": [
@@ -110,7 +132,14 @@
 										"name": "set_default_query",
 										"type": "SetVariable",
 										"dependsOn": [],
-										"userProperties": []
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "core_query",
+											"value": {
+												"value": "@concat('select * from glb_msater_data_core.', item().source.table)",
+												"type": "Expression"
+											}
+										}
 									}
 								]
 							}
