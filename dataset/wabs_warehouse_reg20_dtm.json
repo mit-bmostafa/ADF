@@ -1,5 +1,5 @@
 {
-	"name": "DestinationDataset_5vl",
+	"name": "wabs_warehouse_reg20_dtm",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lksazureblobstorage",
