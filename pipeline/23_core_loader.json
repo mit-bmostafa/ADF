@@ -31,16 +31,7 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": [
-								{
-									"name": "Source",
-									"value": "glb_master_data_dtm.@{item().source.table}"
-								},
-								{
-									"name": "Destination",
-									"value": "data/dtm_eng/tmp/100000_95/hive/dim/@{item().destination.fileName}"
-								}
-							],
+							"userProperties": [],
 							"typeProperties": {
 								"source": {
 									"type": "AzureSqlSource",
@@ -207,10 +198,6 @@
 						}
 					}
 				]
-			},
-			"query": {
-				"type": "string",
-				"defaultValue": "''"
 			}
 		},
 		"variables": {
