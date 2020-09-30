@@ -55,7 +55,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "SourceDataset_5vl",
+									"referenceName": "sqlserver_glb_master_data_dtm",
 									"type": "DatasetReference",
 									"parameters": {
 										"cw_table": "@item().source.table"

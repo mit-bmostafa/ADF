@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "sqlserver_to_hive",
+				"name": "22_1_loop_dtm_tables",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
@@ -14,7 +14,7 @@
 					},
 					"activities": [
 						{
-							"name": "Copy_5vl",
+							"name": "22_1_1_copy_table",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -55,7 +55,7 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "SourceDataset_5vl",
+									"referenceName": "sqlserver_glb_master_data_dtm",
 									"type": "DatasetReference",
 									"parameters": {
 										"cw_table": "@item().source.table"

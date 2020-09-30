@@ -1,5 +1,5 @@
 {
-	"name": "SourceDataset_5vl",
+	"name": "sqlserver_glb_master_data_dtm",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lksazuresqldatabase",
