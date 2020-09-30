@@ -119,6 +119,10 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
 					"activities": [
 						{
 							"name": "22_3_1_copy_table",
