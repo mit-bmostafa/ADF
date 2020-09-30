@@ -135,13 +135,25 @@
 							"typeProperties": {
 								"source": {
 									"type": "HiveSource",
-									"query": "@concat('select * from reg20_dtm_eng_dtm.', item().source.table)"
+									"query": {
+										"value": "@concat('select * from reg20_dtm_eng_dtm.', item().source.table)",
+										"type": "Expression"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink"
 								},
 								"enableStaging": false
 							},
 							"inputs": [
 								{
 									"referenceName": "ds_hdi_hive",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlserver_reg20_dtm_eng_dtm",
 									"type": "DatasetReference"
 								}
 							]
