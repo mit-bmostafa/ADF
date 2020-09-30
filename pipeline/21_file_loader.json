@@ -14,7 +14,7 @@
 					},
 					"activities": [
 						{
-							"name": "copy_ref_file",
+							"name": "21_1_1_file_to_warehouse",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -75,6 +75,131 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "21_1_2_file_to_archive",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "21_1_1_file_to_warehouse",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "wabs_data_source_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": "data",
+										"Directory": "dtm_eng/ref",
+										"filename": {
+											"value": "@item().source.filename",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "wabs_data_destination",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": "data",
+										"Directory": {
+											"value": "@concat('archive/ref/' ,getPastTime(0, 'Day'))",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@item().source.filename",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "21_1_3_file_to_trash",
+							"type": "Delete",
+							"dependsOn": [
+								{
+									"activity": "21_1_2_file_to_archive",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "wabs_data_source_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": "data",
+										"Directory": "dtm_eng/ref",
+										"filename": {
+											"value": "@item().source.filename",
+											"type": "Expression"
+										}
+									}
+								},
+								"enableLogging": true,
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								}
+							}
+						},
+						{
+							"name": "Hive1",
+							"type": "HDInsightHive",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"scriptPath": ""
+							}
 						}
 					]
 				}
