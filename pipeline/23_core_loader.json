@@ -96,7 +96,7 @@
 												"typeProperties": {
 													"variableName": "core_query",
 													"value": {
-														"value": "@concat(concat('select * from glb_msater_data_core.', item().source.table), ' where lob like \"%Engie%\" or id<0')",
+														"value": "@concat(concat('select * from glb_master_data_core.', item().source.table), ' where lob like \"%Engie%\" or id<0')",
 														"type": "Expression"
 													}
 												}
@@ -114,7 +114,7 @@
 												"typeProperties": {
 													"variableName": "core_query",
 													"value": {
-														"value": "@concat(concat('select * from glb_msater_data_core.', item().source.table), ' where sub_lob_cd like \"%Engie%\" or id<0')",
+														"value": "@concat(concat('select * from glb_master_data_core.', item().source.table), ' where sub_lob_cd like \"%Engie%\" or id<0')",
 														"type": "Expression"
 													}
 												}
@@ -132,7 +132,7 @@
 												"typeProperties": {
 													"variableName": "core_query",
 													"value": {
-														"value": "@concat(concat('select * from glb_msater_data_core.', item().source.table), ' where owner like \"%Engie%\" or id<0')",
+														"value": "@concat(concat('select * from glb_master_data_core.', item().source.table), ' where owner like \"%Engie%\" or id<0')",
 														"type": "Expression"
 													}
 												}
@@ -149,7 +149,7 @@
 										"typeProperties": {
 											"variableName": "core_query",
 											"value": {
-												"value": "@concat('select * from glb_msater_data_core.', item().source.table)",
+												"value": "@concat('select * from glb_master_data_core.', item().source.table)",
 												"type": "Expression"
 											}
 										}
