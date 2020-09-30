@@ -141,6 +141,10 @@
 						}
 					}
 				]
+			},
+			"query": {
+				"type": "string",
+				"defaultValue": "''"
 			}
 		},
 		"folder": {
