@@ -16,7 +16,14 @@
 						{
 							"name": "21_1_1_file_to_warehouse",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "21_1_0_clean_warehouse",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
@@ -178,7 +185,7 @@
 										}
 									}
 								},
-								"enableLogging": true,
+								"enableLogging": false,
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true
@@ -186,8 +193,8 @@
 							}
 						},
 						{
-							"name": "Hive1",
-							"type": "HDInsightHive",
+							"name": "21_1_0_clean_warehouse",
+							"type": "Delete",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "7.00:00:00",
@@ -198,7 +205,26 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"scriptPath": ""
+								"dataset": {
+									"referenceName": "wabs_data_source_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": "hive",
+										"Directory": {
+											"value": "@concat('warehouse/reg20_master_data_tmp/', item().destination.directory)",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@item().source.filename",
+											"type": "Expression"
+										}
+									}
+								},
+								"enableLogging": false,
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								}
 							}
 						}
 					]
