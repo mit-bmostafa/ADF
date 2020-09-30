@@ -76,6 +76,61 @@
 				}
 			}
 		],
+		"parameters": {
+			"cw_items": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"source": {
+							"table": "dm_client"
+						},
+						"destination": {
+							"fileName": "dm_client/dm_client.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_date"
+						},
+						"destination": {
+							"fileName": "dm_date/dm_date.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_media_channel"
+						},
+						"destination": {
+							"fileName": "dm_media_channel/dm_media_channel.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_region"
+						},
+						"destination": {
+							"fileName": "dm_region/dm_region.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_system"
+						},
+						"destination": {
+							"fileName": "dm_system/dm_system.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_time"
+						},
+						"destination": {
+							"fileName": "dm_time/dm_time.csv"
+						}
+					}
+				]
+			}
+		},
 		"folder": {
 			"name": "02_dim_loader"
 		},
