@@ -71,6 +71,34 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Switch1",
+							"type": "Switch",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"on": {
+									"value": "@item().source.table",
+									"type": "Expression"
+								},
+								"cases": [
+									{
+										"value": "'lob'",
+										"activities": [
+											{
+												"name": "set_lob_query",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": []
+											}
+										]
+									},
+									{
+										"value": "'sub_lob'"
+									}
+								]
+							}
 						}
 					]
 				}
