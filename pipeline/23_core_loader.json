@@ -16,7 +16,14 @@
 						{
 							"name": "23_1_1_sqlserver_to_hive",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Switch1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "7.00:00:00",
 								"retry": 0,
@@ -96,6 +103,14 @@
 									},
 									{
 										"value": "'sub_lob'"
+									}
+								],
+								"defaultActivities": [
+									{
+										"name": "set_default_query",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"userProperties": []
 									}
 								]
 							}
