@@ -18,7 +18,7 @@
 							"type": "Copy",
 							"dependsOn": [
 								{
-									"activity": "Switch1",
+									"activity": "switch_tables",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -44,6 +44,10 @@
 							"typeProperties": {
 								"source": {
 									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "@variables('core_query')",
+										"type": "Expression"
+									},
 									"partitionOption": "None"
 								},
 								"sink": {
@@ -80,7 +84,7 @@
 							]
 						},
 						{
-							"name": "Switch1",
+							"name": "switch_tables",
 							"type": "Switch",
 							"dependsOn": [],
 							"userProperties": [],
