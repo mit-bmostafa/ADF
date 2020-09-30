@@ -183,11 +183,11 @@
 									"parameters": {
 										"Container": "hive",
 										"Directory": {
-											"value": "@concat('warehouse/reg20_master_data_core/', item().destination.directory)",
+											"value": "@concat('warehouse/reg20_master_data_core/', item().source.table)",
 											"type": "Expression"
 										},
 										"filename": {
-											"value": "@item().source.filename",
+											"value": "@item().destination.filename",
 											"type": "Expression"
 										}
 									}
