@@ -142,7 +142,7 @@
 									"parameters": {
 										"Container": "data",
 										"Directory": {
-											"value": "@concat('archive/ref/' ,getPastTime(0, 'Day'))",
+											"value": "@concat('archive/ref/' ,replace(substring(getPastTime(0, 'Day'),0,10), '-', ''))",
 											"type": "Expression"
 										},
 										"filename": {
