@@ -93,7 +93,7 @@
 								},
 								"cases": [
 									{
-										"value": "'lob'",
+										"value": "lob",
 										"activities": [
 											{
 												"name": "set_lob_query",
@@ -111,7 +111,7 @@
 										]
 									},
 									{
-										"value": "'sub_lob'",
+										"value": "sub_lob",
 										"activities": [
 											{
 												"name": "set_sub_lob_query",
@@ -129,7 +129,7 @@
 										]
 									},
 									{
-										"value": "'system'",
+										"value": "system",
 										"activities": [
 											{
 												"name": "set_system_query",
