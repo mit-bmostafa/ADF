@@ -64,7 +64,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "DestinationDataset_5vl",
+									"referenceName": "wabs_warehouse_reg20_dtm",
 									"type": "DatasetReference",
 									"parameters": {
 										"cw_fileName": "@item().destination.fileName"
@@ -73,6 +73,37 @@
 							]
 						}
 					]
+				}
+			},
+			{
+				"name": "22_2_hive_to_dtm",
+				"type": "HDInsightHive",
+				"dependsOn": [
+					{
+						"activity": "22_1_loop_dtm_tables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"scriptPath": "hive/scripts/reg20_dtm_eng_dtm_dim.hql",
+					"scriptLinkedService": {
+						"referenceName": "lksazureblobstorage",
+						"type": "LinkedServiceReference"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "lkshdinsight",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
