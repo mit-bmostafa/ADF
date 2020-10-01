@@ -45,7 +45,7 @@
 					},
 					"activities": [
 						{
-							"name": "22_3_1_copy_dim_tables",
+							"name": "24_2_1_copy_dim_tables",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
