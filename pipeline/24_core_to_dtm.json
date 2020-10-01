@@ -27,9 +27,16 @@
 				}
 			},
 			{
-				"name": "22_3_hive_to_sqlserver",
+				"name": "24_2_hive_to_sqlserver",
 				"type": "ForEach",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "24_1_core_to_dtm",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
@@ -87,6 +94,33 @@
 				}
 			}
 		],
+		"parameters": {
+			"cw_items": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"source": {
+							"table": "dm_lob"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_skill"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_activity"
+						}
+					},
+					{
+						"source": {
+							"table": "dm_employee"
+						}
+					}
+				]
+			}
+		},
 		"folder": {
 			"name": "02_dim_loader"
 		},
