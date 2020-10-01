@@ -229,6 +229,37 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "21_2_tmp_to_core",
+				"type": "HDInsightHive",
+				"dependsOn": [
+					{
+						"activity": "21_1_loop_files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"scriptPath": "hive/scripts/reg20_master_data_core.hql",
+					"scriptLinkedService": {
+						"referenceName": "lksazureblobstorage",
+						"type": "LinkedServiceReference"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "lkshdinsight",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
