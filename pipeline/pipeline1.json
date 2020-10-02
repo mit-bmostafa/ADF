@@ -55,7 +55,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"dw_table": {
-											"value": "@item().destincation.table",
+											"value": "@item().destination.table",
 											"type": "Expression"
 										}
 									}
