@@ -1,0 +1,24 @@
+{
+	"name": "sqlserver_reg20_master_data_core",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazuresqldatabase",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_table": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "reg20_master_data_core",
+			"table": {
+				"value": "@dataset().cw_table",
+				"type": "Expression"
+			}
+		}
+	}
+}
