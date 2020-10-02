@@ -96,22 +96,6 @@
 					},
 					{
 						"source": {
-							"filename": "lt_skill_activity/lt_skill_activity.csv"
-						},
-						"destination": {
-							"table": "lt_skill_activity"
-						}
-					},
-					{
-						"source": {
-							"filename": "lt_activity_sublob/lt_activity_sublob.csv"
-						},
-						"destination": {
-							"table": "lt_activity_sublob"
-						}
-					},
-					{
-						"source": {
 							"filename": "activity/activity.csv"
 						},
 						"destination": {
