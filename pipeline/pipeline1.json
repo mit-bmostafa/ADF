@@ -54,7 +54,7 @@
 									"referenceName": "sqlserver_reg20_master_data_core",
 									"type": "DatasetReference",
 									"parameters": {
-										"cw_table": {
+										"dw_table": {
 											"value": "@item().destincation.table",
 											"type": "Expression"
 										}
