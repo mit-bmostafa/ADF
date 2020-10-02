@@ -12,6 +12,7 @@
 						"value": "@pipeline().parameters.dw_items",
 						"type": "Expression"
 					},
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "22_3_1_copy_core_tables",
@@ -68,7 +69,7 @@
 		],
 		"parameters": {
 			"dw_items": {
-				"type": "string",
+				"type": "array",
 				"defaultValue": [
 					{
 						"source": {
