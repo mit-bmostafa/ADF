@@ -73,62 +73,6 @@
 				"defaultValue": [
 					{
 						"source": {
-							"filename": "lob/lob.csv"
-						},
-						"destination": {
-							"table": "lob"
-						}
-					},
-					{
-						"source": {
-							"filename": "sub_lob/sub_lob.csv"
-						},
-						"destination": {
-							"table": "sub_lob"
-						}
-					},
-					{
-						"source": {
-							"filename": "skill/skill.csv"
-						},
-						"destination": {
-							"table": "skill"
-						}
-					},
-					{
-						"source": {
-							"filename": "activity/activity.csv"
-						},
-						"destination": {
-							"table": "activity"
-						}
-					},
-					{
-						"source": {
-							"filename": "system/system.csv"
-						},
-						"destination": {
-							"table": "system"
-						}
-					},
-					{
-						"source": {
-							"filename": "company/company.csv"
-						},
-						"destination": {
-							"table": "company"
-						}
-					},
-					{
-						"source": {
-							"filename": "login_employee/login_employee.csv"
-						},
-						"destination": {
-							"table": "login_employee"
-						}
-					},
-					{
-						"source": {
 							"filename": "employee/employee.csv"
 						},
 						"destination": {
