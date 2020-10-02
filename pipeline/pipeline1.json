@@ -29,7 +29,7 @@
 								"source": {
 									"type": "HiveSource",
 									"query": {
-										"value": "@concat('select * from reg20_master_data_core.', item().source.table)",
+										"value": "@concat('select * from reg20_master_data_core.', item().destincation.table)",
 										"type": "Expression"
 									}
 								},
@@ -51,10 +51,13 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "sqlserver_reg20_dtm_eng_dtm",
+									"referenceName": "sqlserver_reg20_master_data_core",
 									"type": "DatasetReference",
 									"parameters": {
-										"cw_table": "@item().source.table"
+										"cw_table": {
+											"value": "@item().destincation.table",
+											"type": "Expression"
+										}
 									}
 								}
 							]
