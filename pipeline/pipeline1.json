@@ -36,7 +36,7 @@
 								"sink": {
 									"type": "AzureSqlSink",
 									"preCopyScript": {
-										"value": "@{concat(concat('delete from reg20_dtm_eng_dtm.', item().destination.table), ' where id > -5')}",
+										"value": "@{concat(concat('delete from reg20_master_data_core.', item().destination.table), ' where id > -5')}",
 										"type": "Expression"
 									},
 									"disableMetricsCollection": false
