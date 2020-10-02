@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"cw_table": {
+			"dw_table": {
 				"type": "string"
 			}
 		},
@@ -16,7 +16,7 @@
 		"typeProperties": {
 			"schema": "reg20_master_data_core",
 			"table": {
-				"value": "@dataset().cw_table",
+				"value": "@dataset().dw_table",
 				"type": "Expression"
 			}
 		}
