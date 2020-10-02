@@ -29,7 +29,7 @@
 								"source": {
 									"type": "HiveSource",
 									"query": {
-										"value": "@concat('select * from reg20_master_data_core.', item().destincation.table)",
+										"value": "@concat('select * from reg20_master_data_core.', item().destination.table)",
 										"type": "Expression"
 									}
 								},
