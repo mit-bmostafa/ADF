@@ -1,0 +1,12 @@
+{
+	"name": "ds_hdi_hive",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lk_hive_server",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "HiveObject",
+		"schema": []
+	}
+}

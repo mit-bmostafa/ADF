@@ -1,0 +1,257 @@
+{
+	"name": "23_core_loader",
+	"properties": {
+		"activities": [
+			{
+				"name": "23_1_loop_glb_tables",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "23_1_1_sqlserver_to_hive",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "switch_tables",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "@variables('core_query')",
+										"type": "Expression"
+									},
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"validateDataConsistency": false
+							},
+							"inputs": [
+								{
+									"referenceName": "sqlserver_glb_master_data_core",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().source.table"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "wabs_warehouse_reg20_core",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_fileName": "@item().destination.fileName"
+									}
+								}
+							]
+						},
+						{
+							"name": "switch_tables",
+							"type": "Switch",
+							"dependsOn": [
+								{
+									"activity": "23_1_1_clean_dest",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"on": {
+									"value": "@item().source.table",
+									"type": "Expression"
+								},
+								"cases": [
+									{
+										"value": "lob",
+										"activities": [
+											{
+												"name": "set_lob_query",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "@concat(concat('select * from glb_master_data_core.', item().source.table), ' where lob like ''%Engie%'' or id<0')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"value": "sub_lob",
+										"activities": [
+											{
+												"name": "set_sub_lob_query",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "@concat(concat('select * from glb_master_data_core.', item().source.table), ' where sub_lob like ''%Engie%'' or id<0')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"value": "system",
+										"activities": [
+											{
+												"name": "set_system_query",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "@concat(concat('select * from glb_master_data_core.', item().source.table), ' where owner like ''%Engie%'' or id<0')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									}
+								],
+								"defaultActivities": [
+									{
+										"name": "set_default_query",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "core_query",
+											"value": {
+												"value": "@concat('select * from glb_master_data_core.', item().source.table)",
+												"type": "Expression"
+											}
+										}
+									}
+								]
+							}
+						},
+						{
+							"name": "23_1_1_clean_dest",
+							"type": "Delete",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "wabs_data_source_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": "hive",
+										"Directory": {
+											"value": "@concat('warehouse/reg20_master_data_core/', item().source.table)",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@item().destination.filename",
+											"type": "Expression"
+										}
+									}
+								},
+								"enableLogging": false,
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"source": {
+							"table": "lob"
+						},
+						"destination": {
+							"fileName": "lob/lob.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "sub_lob"
+						},
+						"destination": {
+							"fileName": "sub_lob/sub_lob.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "system"
+						},
+						"destination": {
+							"fileName": "system/system.csv"
+						}
+					},
+					{
+						"source": {
+							"table": "company"
+						},
+						"destination": {
+							"fileName": "company/company.csv"
+						}
+					}
+				]
+			}
+		},
+		"variables": {
+			"core_query": {
+				"type": "String",
+				"defaultValue": "''"
+			}
+		},
+		"folder": {
+			"name": "02_dim_loader"
+		},
+		"annotations": []
+	}
+}

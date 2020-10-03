@@ -1,0 +1,87 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "22_3_hive_to_sqlserver",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.dw_items",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "22_3_1_copy_core_tables",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "HiveSource",
+									"query": {
+										"value": "@concat('select * from reg20_master_data_core.', item().destination.table)",
+										"type": "Expression"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"preCopyScript": {
+										"value": "@{concat(concat('delete from reg20_master_data_core.', item().destination.table), ' where id > -5')}",
+										"type": "Expression"
+									},
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_hdi_hive",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlserver_reg20_master_data_core",
+									"type": "DatasetReference",
+									"parameters": {
+										"dw_table": {
+											"value": "@item().destination.table",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"dw_items": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"source": {
+							"filename": "employee/employee.csv"
+						},
+						"destination": {
+							"table": "employee"
+						}
+					}
+				]
+			}
+		},
+		"annotations": []
+	}
+}
