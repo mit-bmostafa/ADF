@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "test_accents",
+				"name": "23_2_load_company",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -16,51 +16,40 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "BinarySource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "SELECT cm.*\n  FROM [glb_master_data_core].[country] c\n  join [glb_master_data_core].[region] r on c.fk_region_id = r.id\n  join [glb_master_data_core].[company] cm on cm.fk_country_id = c.id\n  where r.region = 'FAB'",
+							"type": "Expression"
 						},
-						"formatSettings": {
-							"type": "BinaryReadSettings"
-						}
+						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "BinarySink",
+						"type": "ParquetSink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"validateDataConsistency": false
 				},
 				"inputs": [
 					{
-						"referenceName": "wabs_data_source_file",
+						"referenceName": "sqlserver_glb_master_data_core",
 						"type": "DatasetReference",
 						"parameters": {
-							"Container": "data",
-							"Directory": "dtm_eng/ref",
-							"filename": {
-								"value": "af_activity.csv",
-								"type": "Expression"
-							}
+							"cw_table": "company"
 						}
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "wabs_data_destination",
+						"referenceName": "wabs_warehouse_reg20_core",
 						"type": "DatasetReference",
 						"parameters": {
-							"Container": "hive",
-							"Directory": {
-								"value": "warehouse/reg20_master_data_tmp/tmp_af_activity",
-								"type": "Expression"
-							},
-							"filename": {
-								"value": "af_activity.csv",
-								"type": "Expression"
-							}
+							"cw_fileName": "company/company.parquet"
 						}
 					}
 				]
