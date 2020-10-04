@@ -1,0 +1,21 @@
+{
+	"name": "writing_test",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazureblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "company.parquet",
+				"folderPath": "warehouse/reg20_master_data_core/company",
+				"container": "hive"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
