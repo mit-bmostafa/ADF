@@ -65,7 +65,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "wabs_warehouse_reg20_core_p",
+									"referenceName": "wabs_warehouse_reg20_core",
 									"type": "DatasetReference",
 									"parameters": {
 										"cw_fileName": "@item().destination.filename"

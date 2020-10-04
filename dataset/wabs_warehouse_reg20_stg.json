@@ -1,5 +1,5 @@
 {
-	"name": "wabs_warehouse_reg20_core",
+	"name": "wabs_warehouse_reg20_stg",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lksazureblobstorage",
