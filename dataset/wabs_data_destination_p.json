@@ -1,0 +1,21 @@
+{
+	"name": "wabs_data_destination_p",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazureblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "af_activity.parquet",
+				"folderPath": "warehouse/reg20_master_data_tmp/tmp_af_activity",
+				"container": "data"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
