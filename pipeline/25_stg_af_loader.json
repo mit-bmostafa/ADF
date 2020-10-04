@@ -1,0 +1,86 @@
+{
+	"name": "25_stg_af_loader",
+	"properties": {
+		"activities": [
+			{
+				"name": "25_1_hive_to_sqlserver",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "25_3_1_copy_dim_tables",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "HiveSource",
+									"query": {
+										"value": "@concat('select * from reg20_master_data_tmp.', item().source.table)",
+										"type": "Expression"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"preCopyScript": {
+										"value": "@{concat('truncate table reg20_dtm_eng_stg.', item().destination.table)}",
+										"type": "Expression"
+									},
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_hdi_hive",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlserver_reg20_dtm_eng_dtm",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().destination.table"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"source": {
+							"table": "tmp_af_mapping_skill_genesys_skill"
+						},
+						"destination": {
+							"table": "his_af_mapping_skill_genesys_skill"
+						}
+					}
+				]
+			}
+		},
+		"folder": {
+			"name": "02_dim_loader"
+		},
+		"annotations": []
+	}
+}
