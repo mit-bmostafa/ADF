@@ -200,6 +200,65 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "23_2_load_company",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "23_1_loop_glb_tables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "SELECT cm.*\n  FROM [glb_master_data_core].[country] c\n  join [glb_master_data_core].[region] r on c.fk_region_id = r.id\n  join [glb_master_data_core].[company] cm on cm.fk_country_id = c.id\n  where r.region = 'FAB'",
+							"type": "Expression"
+						},
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false
+				},
+				"inputs": [
+					{
+						"referenceName": "sqlserver_glb_master_data_core",
+						"type": "DatasetReference",
+						"parameters": {
+							"cw_table": "company"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "wabs_warehouse_reg20_core",
+						"type": "DatasetReference",
+						"parameters": {
+							"cw_fileName": "company/company.parquet"
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
@@ -228,14 +287,6 @@
 						},
 						"destination": {
 							"fileName": "system/system.parquet"
-						}
-					},
-					{
-						"source": {
-							"table": "company"
-						},
-						"destination": {
-							"fileName": "company/company.parquet"
 						}
 					}
 				]
