@@ -74,6 +74,22 @@
 						"destination": {
 							"table": "his_af_mapping_skill_genesys_skill"
 						}
+					},
+					{
+						"source": {
+							"table": "tmp_af_mapping_company_siop_company"
+						},
+						"destination": {
+							"table": "his_af_mapping_company_siop_company"
+						}
+					},
+					{
+						"source": {
+							"table": "tmp_af_mapping_system_siop_system"
+						},
+						"destination": {
+							"table": "his_af_mapping_system_siop_system"
+						}
 					}
 				]
 			}
