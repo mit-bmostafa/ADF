@@ -7,8 +7,7 @@
 		},
 		"parameters": {
 			"cw_fileName": {
-				"type": "String",
-				"defaultValue": "company"
+				"type": "String"
 			}
 		},
 		"annotations": [],
