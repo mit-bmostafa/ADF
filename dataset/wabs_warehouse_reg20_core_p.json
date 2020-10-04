@@ -1,0 +1,21 @@
+{
+	"name": "wabs_warehouse_reg20_core_p",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazureblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "@dataset().cw_fileName",
+				"folderPath": "warehouse/reg20_master_data_core",
+				"container": "hive"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
