@@ -213,7 +213,7 @@
 							"table": "lob"
 						},
 						"destination": {
-							"fileName": "lob/lob.csv"
+							"fileName": "lob/lob.parquet"
 						}
 					},
 					{
@@ -221,7 +221,7 @@
 							"table": "sub_lob"
 						},
 						"destination": {
-							"fileName": "sub_lob/sub_lob.csv"
+							"fileName": "sub_lob/sub_lob.parquet"
 						}
 					},
 					{
@@ -229,7 +229,7 @@
 							"table": "system"
 						},
 						"destination": {
-							"fileName": "system/system.csv"
+							"fileName": "system/system.parquet"
 						}
 					},
 					{
@@ -237,7 +237,7 @@
 							"table": "company"
 						},
 						"destination": {
-							"fileName": "company/company.csv"
+							"fileName": "company/company.parquet"
 						}
 					}
 				]
