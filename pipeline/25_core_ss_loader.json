@@ -36,7 +36,7 @@
 								"sink": {
 									"type": "AzureSqlSink",
 									"preCopyScript": {
-										"value": "@{concat('truncate table reg20_dtm_eng_stg.', item().destination.table)}",
+										"value": "@{concat('truncate table reg20_master_data_core.', item().source.table)}",
 										"type": "Expression"
 									},
 									"disableMetricsCollection": false
