@@ -51,10 +51,10 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "sqlserver_reg20_dtm_eng_stg",
+									"referenceName": "sqlserver_glb_master_data_core",
 									"type": "DatasetReference",
 									"parameters": {
-										"cw_table": "@item().destination.table"
+										"cw_table": "@item().source.table"
 									}
 								}
 							]
