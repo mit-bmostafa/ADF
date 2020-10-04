@@ -43,14 +43,12 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "DelimitedTextSink",
+									"type": "ParquetSink",
 									"storeSettings": {
 										"type": "AzureBlobStorageWriteSettings"
 									},
 									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
+										"type": "ParquetWriteSettings"
 									}
 								},
 								"enableStaging": false,
@@ -67,11 +65,8 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "wabs_warehouse_reg20_core",
-									"type": "DatasetReference",
-									"parameters": {
-										"cw_fileName": "@item().destination.fileName"
-									}
+									"referenceName": "wabs_warehouse_reg20_core_p",
+									"type": "DatasetReference"
 								}
 							]
 						},
