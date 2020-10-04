@@ -1,5 +1,5 @@
 {
-	"name": "25_stg_af_loader",
+	"name": "25_core_ss_loader",
 	"properties": {
 		"activities": [
 			{
@@ -29,7 +29,7 @@
 								"source": {
 									"type": "HiveSource",
 									"query": {
-										"value": "@concat('select * from reg20_master_data_tmp.', item().source.table)",
+										"value": "@concat('select * from reg20_master_data_core.', item().source.table)",
 										"type": "Expression"
 									}
 								},
@@ -69,26 +69,52 @@
 				"defaultValue": [
 					{
 						"source": {
-							"table": "tmp_af_mapping_skill_genesys_skill"
-						},
-						"destination": {
-							"table": "his_af_mapping_skill_genesys_skill"
+							"table": "lob"
 						}
 					},
 					{
 						"source": {
-							"table": "tmp_af_mapping_company_siop_company"
-						},
-						"destination": {
-							"table": "his_af_mapping_company_siop_company"
+							"table": "sub_lob"
 						}
 					},
 					{
 						"source": {
-							"table": "tmp_af_mapping_system_siop_system"
-						},
-						"destination": {
-							"table": "his_af_mapping_system_siop_system"
+							"table": "skill"
+						}
+					},
+					{
+						"source": {
+							"table": "activity"
+						}
+					},
+					{
+						"source": {
+							"table": "lt_skill_activity"
+						}
+					},
+					{
+						"source": {
+							"table": "lt_activity_sublob"
+						}
+					},
+					{
+						"source": {
+							"table": "system"
+						}
+					},
+					{
+						"source": {
+							"table": "company"
+						}
+					},
+					{
+						"source": {
+							"table": "employee"
+						}
+					},
+					{
+						"source": {
+							"table": "login_employee"
 						}
 					}
 				]
