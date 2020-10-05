@@ -433,10 +433,12 @@
 				"defaultValue": "dtm_eng/out/archive/100000_95"
 			},
 			"windowStart": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "20200701"
 			},
 			"windowEnd": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "20201001"
 			}
 		},
 		"folder": {
