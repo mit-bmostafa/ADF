@@ -434,11 +434,11 @@
 			},
 			"windowStart": {
 				"type": "string",
-				"defaultValue": "20200701"
+				"defaultValue": "2020-07-01"
 			},
 			"windowEnd": {
 				"type": "string",
-				"defaultValue": "20201001"
+				"defaultValue": "2020-10-01"
 			}
 		},
 		"folder": {
