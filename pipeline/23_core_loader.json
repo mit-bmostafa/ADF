@@ -247,6 +247,14 @@
 						"destination": {
 							"fileName": "system/system.parquet"
 						}
+					},
+					{
+						"source": {
+							"table": "country"
+						},
+						"destination": {
+							"fileName": "country/country.parquet"
+						}
 					}
 				]
 			}
