@@ -67,7 +67,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@and(equals(item().type, 'File'),startswith(item().name, 'ConversationReport') )",
+						"value": "@not(and(equals(item().type, 'File'),startswith(item().name, 'ConversationReport') ))",
 						"type": "Expression"
 					}
 				}
