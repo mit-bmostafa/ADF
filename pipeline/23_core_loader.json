@@ -162,6 +162,24 @@
 												}
 											}
 										]
+									},
+									{
+										"value": "country",
+										"activities": [
+											{
+												"name": "set_country_query",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "SELECT c.*\n  FROM [glb_master_data_core].[country] c\n  join [glb_master_data_core].[region] r on c.fk_region_id = r.id\n  where r.region = 'FAB'",
+														"type": "Expression"
+													}
+												}
+											}
+										]
 									}
 								],
 								"defaultActivities": [
