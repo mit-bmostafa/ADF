@@ -343,7 +343,7 @@
 							"filename": "siop_master_data_employee_hierarchy_functional.csv"
 						},
 						"destination": {
-							"directory": "employee_hierarchy_functional"
+							"directory": "tmp_master_data_employee_hierarchy_functional"
 						}
 					}
 				]
