@@ -233,7 +233,10 @@
 											"value": "@pipeline().parameters.DestinationStore_Directory",
 											"type": "Expression"
 										},
-										"filename": "@item().name"
+										"filename": {
+											"value": "@concat(substring(item().name,0,10),'-performance.csv')",
+											"type": "Expression"
+										}
 									}
 								}
 							]
