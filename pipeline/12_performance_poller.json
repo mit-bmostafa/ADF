@@ -422,7 +422,7 @@
 			},
 			"DestinationStore_Directory": {
 				"type": "string",
-				"defaultValue": "warehouse/reg20_dtm_eng_tmp/raw_agent_tbl"
+				"defaultValue": "warehouse/reg20_dtm_eng_tmp/raw_performance_tbl"
 			},
 			"ArchiveStore_Location": {
 				"type": "string",
