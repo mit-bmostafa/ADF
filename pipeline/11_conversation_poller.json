@@ -396,7 +396,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "wabs_reg20_dtm_emg_tmp_raw",
+						"referenceName": "wabs_reg20_dtm_emg_tmp_craw",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
@@ -433,10 +433,12 @@
 				"defaultValue": "dtm_eng/out/archive/100000_95"
 			},
 			"windowStart": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2020-07-01"
 			},
 			"windowEnd": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2020-11-01"
 			}
 		},
 		"folder": {
