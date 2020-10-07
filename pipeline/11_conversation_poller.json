@@ -396,7 +396,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "wabs_reg20_dtm_emg_tmp_raw1",
+						"referenceName": "wabs_reg20_dtm_emg_tmp_raw",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
