@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "warehouse/reg20_dtm_eng_tmp/raw_conversation_tbl",
+				"folderPath": "warehouse/reg20_dtm_eng_tmp/raw_*_tbl",
 				"container": "hive"
 			},
 			"columnDelimiter": ",",
