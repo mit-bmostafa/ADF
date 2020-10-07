@@ -14,7 +14,7 @@
 					"value": "\n*.csv",
 					"type": "Expression"
 				},
-				"folderPath": "/Raw"
+				"folderPath": "/data"
 			},
 			"columnDelimiter": ";",
 			"rowDelimiter": "\n",
