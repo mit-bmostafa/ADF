@@ -138,7 +138,7 @@
 												"typeProperties": {
 													"variableName": "core_query",
 													"value": {
-														"value": "@concat(concat('select * from glb_master_data_core.', item().source.table), ' where owner like ''%Engie%'' or id<0')",
+														"value": "select * from glb_master_data_core.system where system_cd in ('sys_000009', 'sys_000010', 'sys_000012') or id<0",
 														"type": "Expression"
 													}
 												}
