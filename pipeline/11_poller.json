@@ -343,7 +343,7 @@
 										"userProperties": [],
 										"typeProperties": {
 											"variableName": "file_type",
-											"value": "'raw_conversation_tbl'"
+											"value": "raw_conversation_tbl"
 										}
 									}
 								]
