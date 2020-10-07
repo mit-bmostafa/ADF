@@ -67,7 +67,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@and(equals(item().type, 'File'),startswith(item().name, 'ConversationReport') )",
+						"value": "@and(equals(item().type, 'File'),startswith(item().name, 'AgentReport') )",
 						"type": "Expression"
 					}
 				}
@@ -422,7 +422,7 @@
 			},
 			"DestinationStore_Directory": {
 				"type": "string",
-				"defaultValue": "warehouse/reg20_dtm_eng_tmp/raw_conversation_tbl"
+				"defaultValue": "warehouse/reg20_dtm_eng_tmp/raw_agent_tbl"
 			},
 			"ArchiveStore_Location": {
 				"type": "string",
@@ -433,10 +433,12 @@
 				"defaultValue": "dtm_eng/out/archive/100000_95"
 			},
 			"windowStart": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2020-07-01"
 			},
 			"windowEnd": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2020-11-01"
 			}
 		},
 		"folder": {
