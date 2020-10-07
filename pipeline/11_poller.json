@@ -464,7 +464,8 @@
 					"enableLogging": false,
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
-						"recursive": true
+						"recursive": true,
+						"prefix": "raw_*"
 					}
 				}
 			}
