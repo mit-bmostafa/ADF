@@ -234,7 +234,7 @@
 											"type": "Expression"
 										},
 										"filename": {
-											"value": "@concat(substring(item().name,0,10),'-performance.csv')",
+											"value": "@substring(item().name,0,10)",
 											"type": "Expression"
 										}
 									}
