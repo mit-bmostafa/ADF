@@ -1,0 +1,112 @@
+{
+	"name": "sftp_source_ds1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksftpwinserver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "\n*.csv",
+					"type": "Expression"
+				},
+				"folderPath": "/Raw"
+			},
+			"columnDelimiter": ";",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Identifiant Utilisateur",
+				"type": "String"
+			},
+			{
+				"name": "Date travail Appel",
+				"type": "String"
+			},
+			{
+				"name": "Nombre d indisponibilités",
+				"type": "String"
+			},
+			{
+				"name": "Temps d indisponibilité",
+				"type": "String"
+			},
+			{
+				"name": "Nombre de file d'attente",
+				"type": "String"
+			},
+			{
+				"name": "Temps en file d'attente",
+				"type": "String"
+			},
+			{
+				"name": "Nombre de communications",
+				"type": "String"
+			},
+			{
+				"name": "Temps de communication",
+				"type": "String"
+			},
+			{
+				"name": "Nombre de clotures",
+				"type": "String"
+			},
+			{
+				"name": "Temps de cloture",
+				"type": "String"
+			},
+			{
+				"name": "Nombre d'attentes",
+				"type": "String"
+			},
+			{
+				"name": "Temps d'attente",
+				"type": "String"
+			},
+			{
+				"name": "Temps de login",
+				"type": "String"
+			},
+			{
+				"name": "Nombre de Rotations",
+				"type": "String"
+			},
+			{
+				"name": "Temps de conversation entrant",
+				"type": "String"
+			},
+			{
+				"name": "Tps de Garde Servis",
+				"type": "String"
+			},
+			{
+				"name": "Nombre de Garde Servis",
+				"type": "String"
+			},
+			{
+				"name": "Nombre de Idle",
+				"type": "String"
+			},
+			{
+				"name": "Temps Idle",
+				"type": "String"
+			},
+			{
+				"name": "Nombre de Busy",
+				"type": "String"
+			},
+			{
+				"name": "Temps Busy",
+				"type": "String"
+			}
+		]
+	}
+}
