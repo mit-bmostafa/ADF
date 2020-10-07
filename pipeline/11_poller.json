@@ -422,7 +422,7 @@
 			},
 			"DestinationStore_Directory": {
 				"type": "string",
-				"defaultValue": "warehouse/reg20_dtm_eng_tmp/raw_conversation_tbl"
+				"defaultValue": "warehouse/reg20_dtm_eng_tmp/"
 			},
 			"ArchiveStore_Location": {
 				"type": "string",
@@ -439,6 +439,10 @@
 			"windowEnd": {
 				"type": "string",
 				"defaultValue": "2020-10-01"
+			},
+			"DestinationStore_Type": {
+				"type": "string",
+				"defaultValue": "raw_conversation_tbl"
 			}
 		},
 		"folder": {
