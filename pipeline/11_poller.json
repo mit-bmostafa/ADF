@@ -230,7 +230,7 @@
 											"type": "Expression"
 										},
 										"Directory": {
-											"value": "@pipeline().parameters.DestinationStore_Directory",
+											"value": "@concat(pipeline().parameters.DestinationStore_Directory, pipeline().parameters.DestinationStore_Type)",
 											"type": "Expression"
 										},
 										"filename": "@item().name"
@@ -285,6 +285,30 @@
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true
 								}
+							}
+						},
+						{
+							"name": "file_type",
+							"type": "IfCondition",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@contains(item().name, 'ConversationReport')",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "set_file_type",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "file_type",
+											"value": "'raw_conversation_tbl'"
+										}
+									}
+								]
 							}
 						}
 					]
@@ -439,10 +463,12 @@
 			"windowEnd": {
 				"type": "string",
 				"defaultValue": "2020-10-01"
-			},
-			"DestinationStore_Type": {
-				"type": "string",
-				"defaultValue": "raw_conversation_tbl"
+			}
+		},
+		"variables": {
+			"file_type": {
+				"type": "String",
+				"defaultValue": "performance"
 			}
 		},
 		"folder": {
