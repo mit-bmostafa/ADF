@@ -377,7 +377,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "wabs_data_in_ds1",
+						"referenceName": "wabs_data_in_ds",
 						"type": "DatasetReference"
 					}
 				]
