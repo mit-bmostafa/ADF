@@ -1,5 +1,5 @@
 {
-	"name": "11_poller",
+	"name": "11_conversation_poller",
 	"properties": {
 		"description": "poller",
 		"activities": [
