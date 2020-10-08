@@ -24,15 +24,28 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "wabs_data_in_ds",
-						"type": "DatasetReference"
+						"referenceName": "wabs_data_source_folder",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.SourceStore_Location",
+								"type": "Expression"
+							},
+							"Directory": {
+								"value": "@pipeline().parameters.SourceStore_Directory",
+								"type": "Expression"
+							}
+						}
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
-						"type": "AzureBlobStorageReadSettings"
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true
 					},
 					"formatSettings": {
-						"type": "DelimitedTextReadSettings"
+						"type": "BinaryReadSettings"
 					}
 				}
 			},
@@ -99,24 +112,19 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "DelimitedTextSource",
+									"type": "BinarySource",
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true
 									},
 									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
+										"type": "BinaryReadSettings"
 									}
 								},
 								"sink": {
-									"type": "DelimitedTextSink",
+									"type": "BinarySink",
 									"storeSettings": {
 										"type": "AzureBlobStorageWriteSettings"
-									},
-									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
 									}
 								},
 								"enableStaging": false,
@@ -124,14 +132,39 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "wabs_data_in_ds",
-									"type": "DatasetReference"
+									"referenceName": "wabs_data_source_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.SourceStore_Location",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.SourceStore_Directory",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "wabs_raw_out_ds",
-									"type": "DatasetReference"
+									"referenceName": "wabs_data_destination",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.ArchiveStore_Location",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@concat(pipeline().parameters.ArchiveStore_Directory,'/', substring(split(split(item().name, '-')[2], '.')[0], 0, 6))",
+											"type": "Expression"
+										},
+										"filename": "@item().name"
+									}
 								}
 							]
 						},
@@ -149,24 +182,19 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "DelimitedTextSource",
+									"type": "BinarySource",
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true
 									},
 									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
+										"type": "BinaryReadSettings"
 									}
 								},
 								"sink": {
-									"type": "DelimitedTextSink",
+									"type": "BinarySink",
 									"storeSettings": {
 										"type": "AzureBlobStorageWriteSettings"
-									},
-									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
 									}
 								},
 								"enableStaging": false,
@@ -174,14 +202,39 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "wabs_data_in_ds",
-									"type": "DatasetReference"
+									"referenceName": "wabs_data_source_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.SourceStore_Location",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.SourceStore_Directory",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "wabs_reg20_dtm_emg_tmp_craw",
-									"type": "DatasetReference"
+									"referenceName": "wabs_data_destination",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.DestinationStore_Location",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.DestinationStore_Directory",
+											"type": "Expression"
+										},
+										"filename": "@item().name"
+									}
 								}
 							]
 						},
@@ -206,8 +259,19 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "wabs_data_in_ds",
-									"type": "DatasetReference"
+									"referenceName": "wabs_data_source_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": {
+											"value": "@pipeline().parameters.SourceStore_Location",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.SourceStore_Directory",
+											"type": "Expression"
+										},
+										"filename": "@item().name"
+									}
 								},
 								"logStorageSettings": {
 									"linkedServiceName": {
@@ -260,10 +324,20 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "SftpReadSettings",
-							"recursive": true
+							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@pipeline().parameters.windowStart",
+								"type": "Expression"
+							},
+							"modifiedDatetimeEnd": {
+								"value": "@pipeline().parameters.windowEnd",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 0
 						}
 					},
 					"sink": {

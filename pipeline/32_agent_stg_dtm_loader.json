@@ -1,9 +1,9 @@
 {
-	"name": "31_stg_dtm_loader",
+	"name": "32_agent_stg_dtm_loader",
 	"properties": {
 		"activities": [
 			{
-				"name": "31_1_raw_to_stg",
+				"name": "32_1_raw_to_stg",
 				"type": "HDInsightHive",
 				"dependsOn": [],
 				"policy": {
@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"scriptPath": "hive/scripts/reg20_dtm_eng_stg.hql",
+					"scriptPath": "hive/scripts/reg20_dtm_eng_agent_stg.hql",
 					"scriptLinkedService": {
 						"referenceName": "lksazureblobstorage",
 						"type": "LinkedServiceReference"
@@ -31,7 +31,7 @@
 				"type": "HDInsightHive",
 				"dependsOn": [
 					{
-						"activity": "31_1_raw_to_stg",
+						"activity": "32_1_raw_to_stg",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -46,7 +46,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"scriptPath": "hive/scripts/reg20_dtm_eng_dtm_ft_call.hql",
+					"scriptPath": "hive/scripts/reg20_dtm_eng_dtm_ft_agent.hql",
 					"scriptLinkedService": {
 						"referenceName": "lksazureblobstorage",
 						"type": "LinkedServiceReference"
@@ -79,11 +79,11 @@
 				"typeProperties": {
 					"source": {
 						"type": "HiveSource",
-						"query": "SELECT \tfk_dm_date,\n\tfk_dm_time_system,\n\tfk_dm_time_utc,\n\tfk_dm_activity,\n\tfk_dm_client,\n\tfk_dm_employee_csr,\n\tfk_dm_employee_supervisor,\n\tfk_dm_lob,\n\tfk_dm_media_channel,\n\tfk_dm_region,\n\tfk_dm_skill,\n\tfk_dm_system,\n\tfk_dm_time_slot_client_local,\n\tfk_dm_time_slot_client_utc,\n\tfk_dm_time_slot_intern_local,\n\tfk_dm_time_slot_intern_utc,\n\tis_abandoned_call_flag,\n\tis_handled_call_flag,\n\tis_handled_call_under_10sec_flag,\n\tis_call_placed_on_hold_flag,\n\tis_outbound_call_flag,\n\tis_transferred_call_external_flag,\n\tis_transferred_call_internal_flag,\n\tti_wrapup_time_automatic,\n\tti_talk_time_in,\n\tti_talk_time_out,\n\tti_hold_time_in,\n\tti_hold_time_out,\n\tti_internal_transfer_time,\n\tddm_employee_login,\n\tddm_ticket_id\nFROM reg20_dtm_eng_dtm.ft_call;"
+						"query": "SELECT \n\tfk_dm_date,\n\tfk_dm_client,\n\tfk_dm_employee_csr,\n\tfk_dm_employee_supervisor,\n\tfk_dm_media_channel,\n\tfk_dm_system,\n\tti_availability_time,\n\tti_wrapup_time_manual,\n\tddm_employee_login\nFROM reg20_dtm_eng_dtm.ft_call_agent_activity;"
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "truncate table reg20_dtm_eng_dtm.ft_call;",
+						"preCopyScript": "truncate table reg20_dtm_eng_dtm.ft_call_agent_activity;",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
@@ -107,7 +107,7 @@
 						"referenceName": "sqlserver_reg20_dtm_eng_dtm",
 						"type": "DatasetReference",
 						"parameters": {
-							"cw_table": "ft_call"
+							"cw_table": "ft_call_agent_activity"
 						}
 					}
 				]
