@@ -212,14 +212,6 @@
 					},
 					{
 						"source": {
-							"table": "dm_system"
-						},
-						"destination": {
-							"fileName": "dm_system/dm_system.csv"
-						}
-					},
-					{
-						"source": {
 							"table": "dm_time"
 						},
 						"destination": {
