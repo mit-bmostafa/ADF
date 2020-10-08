@@ -1,0 +1,23 @@
+{
+	"name": "wabs_data_in_csv_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazureblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "dtm_eng/in/100000_95",
+				"container": "data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
