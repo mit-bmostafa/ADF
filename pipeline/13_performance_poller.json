@@ -336,7 +336,7 @@
 								"value": "@pipeline().parameters.windowEnd",
 								"type": "Expression"
 							},
-							"wildcardFileName": "*"
+							"wildcardFileName": "*performances*"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings",
