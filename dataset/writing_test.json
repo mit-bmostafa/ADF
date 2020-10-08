@@ -1,22 +1,17 @@
 {
-	"name": "wabs_warehouse_reg20_core",
+	"name": "writing_test",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lksazureblobstorage",
 			"type": "LinkedServiceReference"
-		},
-		"parameters": {
-			"cw_fileName": {
-				"type": "string"
-			}
 		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "@dataset().cw_fileName",
-				"folderPath": "warehouse/reg20_master_data_core",
+				"fileName": "company.parquet",
+				"folderPath": "warehouse/reg20_master_data_core/company",
 				"container": "hive"
 			},
 			"compressionCodec": "snappy"

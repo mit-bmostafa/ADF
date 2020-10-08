@@ -1,0 +1,29 @@
+{
+	"name": "wabs_reg20_dtm_emg_tmp_araw",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazureblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "warehouse/reg20_dtm_eng_tmp/raw_agent_tbl",
+				"container": "hive"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}

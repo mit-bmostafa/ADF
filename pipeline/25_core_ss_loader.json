@@ -1,42 +1,11 @@
 {
-	"name": "24_core_to_dtm",
+	"name": "25_core_ss_loader",
 	"properties": {
 		"activities": [
 			{
-				"name": "24_1_core_to_dtm",
-				"type": "HDInsightHive",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"scriptPath": "hive/scripts/reg20_master_data_core_dtm.hql",
-					"scriptLinkedService": {
-						"referenceName": "lksazureblobstorage",
-						"type": "LinkedServiceReference"
-					}
-				},
-				"linkedServiceName": {
-					"referenceName": "lkshdinsight",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "24_2_hive_to_sqlserver",
+				"name": "25_1_hive_to_sqlserver",
 				"type": "ForEach",
-				"dependsOn": [
-					{
-						"activity": "24_1_core_to_dtm",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
@@ -45,7 +14,7 @@
 					},
 					"activities": [
 						{
-							"name": "24_2_1_copy_dim_tables",
+							"name": "25_3_1_copy_core_tables",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -60,14 +29,14 @@
 								"source": {
 									"type": "HiveSource",
 									"query": {
-										"value": "@concat('select * from reg20_dtm_eng_dtm.', item().source.table)",
+										"value": "@concat('select * from reg20_master_data_core.', item().source.table)",
 										"type": "Expression"
 									}
 								},
 								"sink": {
 									"type": "AzureSqlSink",
 									"preCopyScript": {
-										"value": "@{concat('truncate table reg20_dtm_eng_dtm.', item().source.table)}",
+										"value": "@{concat('truncate table reg20_master_data_core.', item().source.table)}",
 										"type": "Expression"
 									},
 									"disableMetricsCollection": false
@@ -82,10 +51,10 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "sqlserver_reg20_dtm_eng_dtm",
+									"referenceName": "sqlserver_reg20_master_data_core",
 									"type": "DatasetReference",
 									"parameters": {
-										"cw_table": "@item().source.table"
+										"dw_table": "@item().source.table"
 									}
 								}
 							]
@@ -100,27 +69,57 @@
 				"defaultValue": [
 					{
 						"source": {
-							"table": "dm_lob"
+							"table": "lob"
 						}
 					},
 					{
 						"source": {
-							"table": "dm_skill"
+							"table": "sub_lob"
 						}
 					},
 					{
 						"source": {
-							"table": "dm_activity"
+							"table": "skill"
 						}
 					},
 					{
 						"source": {
-							"table": "dm_employee"
+							"table": "activity"
 						}
 					},
 					{
 						"source": {
-							"table": "dm_system"
+							"table": "lt_skill_activity"
+						}
+					},
+					{
+						"source": {
+							"table": "lt_activity_sublob"
+						}
+					},
+					{
+						"source": {
+							"table": "system"
+						}
+					},
+					{
+						"source": {
+							"table": "company"
+						}
+					},
+					{
+						"source": {
+							"table": "employee"
+						}
+					},
+					{
+						"source": {
+							"table": "login_employee"
+						}
+					},
+					{
+						"source": {
+							"table": "country"
 						}
 					}
 				]

@@ -1,5 +1,5 @@
 {
-	"name": "11_poller",
+	"name": "11_conversation_poller",
 	"properties": {
 		"description": "poller",
 		"activities": [
@@ -24,28 +24,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "wabs_data_source_folder",
-						"type": "DatasetReference",
-						"parameters": {
-							"Container": {
-								"value": "@pipeline().parameters.SourceStore_Location",
-								"type": "Expression"
-							},
-							"Directory": {
-								"value": "@pipeline().parameters.SourceStore_Directory",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "wabs_data_in_ds",
+						"type": "DatasetReference"
 					},
-					"fieldList": [
-						"childItems"
-					],
+					"fieldList": [],
 					"storeSettings": {
-						"type": "AzureBlobStorageReadSettings",
-						"recursive": true
+						"type": "AzureBlobStorageReadSettings"
 					},
 					"formatSettings": {
-						"type": "BinaryReadSettings"
+						"type": "DelimitedTextReadSettings"
 					}
 				}
 			},
@@ -112,19 +99,24 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "BinarySource",
+									"type": "DelimitedTextSource",
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true
 									},
 									"formatSettings": {
-										"type": "BinaryReadSettings"
+										"type": "DelimitedTextReadSettings"
 									}
 								},
 								"sink": {
-									"type": "BinarySink",
+									"type": "DelimitedTextSink",
 									"storeSettings": {
 										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
 									}
 								},
 								"enableStaging": false,
@@ -132,39 +124,14 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "wabs_data_source_file",
-									"type": "DatasetReference",
-									"parameters": {
-										"Container": {
-											"value": "@pipeline().parameters.SourceStore_Location",
-											"type": "Expression"
-										},
-										"Directory": {
-											"value": "@pipeline().parameters.SourceStore_Directory",
-											"type": "Expression"
-										},
-										"filename": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
-									}
+									"referenceName": "wabs_data_in_ds",
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "wabs_data_destination",
-									"type": "DatasetReference",
-									"parameters": {
-										"Container": {
-											"value": "@pipeline().parameters.ArchiveStore_Location",
-											"type": "Expression"
-										},
-										"Directory": {
-											"value": "@concat(pipeline().parameters.ArchiveStore_Directory,'/', substring(split(split(item().name, '-')[2], '.')[0], 0, 6))",
-											"type": "Expression"
-										},
-										"filename": "@item().name"
-									}
+									"referenceName": "wabs_raw_out_ds",
+									"type": "DatasetReference"
 								}
 							]
 						},
@@ -182,19 +149,24 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "BinarySource",
+									"type": "DelimitedTextSource",
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true
 									},
 									"formatSettings": {
-										"type": "BinaryReadSettings"
+										"type": "DelimitedTextReadSettings"
 									}
 								},
 								"sink": {
-									"type": "BinarySink",
+									"type": "DelimitedTextSink",
 									"storeSettings": {
 										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
 									}
 								},
 								"enableStaging": false,
@@ -202,39 +174,14 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "wabs_data_source_file",
-									"type": "DatasetReference",
-									"parameters": {
-										"Container": {
-											"value": "@pipeline().parameters.SourceStore_Location",
-											"type": "Expression"
-										},
-										"Directory": {
-											"value": "@pipeline().parameters.SourceStore_Directory",
-											"type": "Expression"
-										},
-										"filename": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
-									}
+									"referenceName": "wabs_data_in_ds",
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "wabs_data_destination",
-									"type": "DatasetReference",
-									"parameters": {
-										"Container": {
-											"value": "@pipeline().parameters.DestinationStore_Location",
-											"type": "Expression"
-										},
-										"Directory": {
-											"value": "@pipeline().parameters.DestinationStore_Directory",
-											"type": "Expression"
-										},
-										"filename": "@item().name"
-									}
+									"referenceName": "wabs_reg20_dtm_emg_tmp_craw",
+									"type": "DatasetReference"
 								}
 							]
 						},
@@ -259,19 +206,8 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "wabs_data_source_file",
-									"type": "DatasetReference",
-									"parameters": {
-										"Container": {
-											"value": "@pipeline().parameters.SourceStore_Location",
-											"type": "Expression"
-										},
-										"Directory": {
-											"value": "@pipeline().parameters.SourceStore_Directory",
-											"type": "Expression"
-										},
-										"filename": "@item().name"
-									}
+									"referenceName": "wabs_data_in_ds",
+									"type": "DatasetReference"
 								},
 								"logStorageSettings": {
 									"linkedServiceName": {
@@ -324,20 +260,10 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "SftpReadSettings",
-							"recursive": true,
-							"modifiedDatetimeStart": {
-								"value": "@pipeline().parameters.windowStart",
-								"type": "Expression"
-							},
-							"modifiedDatetimeEnd": {
-								"value": "@pipeline().parameters.windowEnd",
-								"type": "Expression"
-							},
-							"wildcardFileName": "*"
+							"recursive": true
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings",
-							"skipLineCount": 0
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -396,7 +322,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "wabs_reg20_dtm_emg_tmp_raw",
+						"referenceName": "wabs_reg20_dtm_emg_tmp_craw",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
@@ -433,10 +359,12 @@
 				"defaultValue": "dtm_eng/out/archive/100000_95"
 			},
 			"windowStart": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2020-07-01"
 			},
 			"windowEnd": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "2020-11-01"
 			}
 		},
 		"folder": {

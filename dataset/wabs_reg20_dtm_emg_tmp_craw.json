@@ -1,5 +1,5 @@
 {
-	"name": "wabs_reg20_dtm_emg_tmp_raw",
+	"name": "wabs_reg20_dtm_emg_tmp_craw",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lksazureblobstorage",

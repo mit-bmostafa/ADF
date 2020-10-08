@@ -43,14 +43,12 @@
 									"partitionOption": "None"
 								},
 								"sink": {
-									"type": "DelimitedTextSink",
+									"type": "ParquetSink",
 									"storeSettings": {
 										"type": "AzureBlobStorageWriteSettings"
 									},
 									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
+										"type": "ParquetWriteSettings"
 									}
 								},
 								"enableStaging": false,
@@ -70,7 +68,7 @@
 									"referenceName": "wabs_warehouse_reg20_core",
 									"type": "DatasetReference",
 									"parameters": {
-										"cw_fileName": "@item().destination.fileName"
+										"cw_fileName": "@item().destination.filename"
 									}
 								}
 							]
@@ -140,7 +138,43 @@
 												"typeProperties": {
 													"variableName": "core_query",
 													"value": {
-														"value": "@concat(concat('select * from glb_master_data_core.', item().source.table), ' where owner like ''%Engie%'' or id<0')",
+														"value": "select * from glb_master_data_core.system where system_cd in ('sys_000009', 'sys_000010', 'sys_000012') or id<0",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"value": "company",
+										"activities": [
+											{
+												"name": "set_company_query",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "SELECT cm.*\n  FROM [glb_master_data_core].[country] c\n  join [glb_master_data_core].[region] r on c.fk_region_id = r.id\n  join [glb_master_data_core].[company] cm on cm.fk_country_id = c.id\n  where r.region = 'FAB'",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"value": "country",
+										"activities": [
+											{
+												"name": "set_country_query",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "SELECT \nc.id,\nc.country_iso_cd_3,\nc.country,\nc.onshore_offshore\n  FROM [glb_master_data_core].[country] c\n  join [glb_master_data_core].[region] r on c.fk_region_id = r.id\n  where r.region = 'FAB'",
 														"type": "Expression"
 													}
 												}
@@ -213,7 +247,7 @@
 							"table": "lob"
 						},
 						"destination": {
-							"fileName": "lob/lob.csv"
+							"fileName": "lob/lob.parquet"
 						}
 					},
 					{
@@ -221,7 +255,7 @@
 							"table": "sub_lob"
 						},
 						"destination": {
-							"fileName": "sub_lob/sub_lob.csv"
+							"fileName": "sub_lob/sub_lob.parquet"
 						}
 					},
 					{
@@ -229,15 +263,15 @@
 							"table": "system"
 						},
 						"destination": {
-							"fileName": "system/system.csv"
+							"fileName": "system/system.parquet"
 						}
 					},
 					{
 						"source": {
-							"table": "company"
+							"table": "country"
 						},
 						"destination": {
-							"fileName": "company/company.csv"
+							"fileName": "country/country.parquet"
 						}
 					}
 				]
