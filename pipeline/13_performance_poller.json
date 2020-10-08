@@ -160,7 +160,7 @@
 											"type": "Expression"
 										},
 										"Directory": {
-											"value": "@concat(pipeline().parameters.ArchiveStore_Directory,'/', substring(split(split(item().name, '-')[2], '.')[0], 0, 6))",
+											"value": "@concat(pipeline().parameters.ArchiveStore_Directory,'/', replace(substring(item().name, 0, 7),'-',''))",
 											"type": "Expression"
 										},
 										"filename": "@item().name"
