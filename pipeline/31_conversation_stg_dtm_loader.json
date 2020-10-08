@@ -1,0 +1,121 @@
+{
+	"name": "31_conversation_stg_dtm_loader",
+	"properties": {
+		"activities": [
+			{
+				"name": "31_1_raw_to_stg",
+				"type": "HDInsightHive",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"scriptPath": "hive/scripts/reg20_dtm_eng_stg.hql",
+					"scriptLinkedService": {
+						"referenceName": "lksazureblobstorage",
+						"type": "LinkedServiceReference"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "lkshdinsight",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "31_2_stg_to_dtm",
+				"type": "HDInsightHive",
+				"dependsOn": [
+					{
+						"activity": "31_1_raw_to_stg",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"scriptPath": "hive/scripts/reg20_dtm_eng_dtm_ft_call.hql",
+					"scriptLinkedService": {
+						"referenceName": "lksazureblobstorage",
+						"type": "LinkedServiceReference"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "lkshdinsight",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "31_3_hive_to_sqlserver",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "31_2_stg_to_dtm",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "HiveSource",
+						"query": "SELECT fk_dm_client,\n\tfk_dm_date,\n\tfk_dm_time_system,\n\tfk_dm_time_utc,\n\tfk_dm_employee,\n\tfk_dm_lob,\n\tfk_dm_media_channel,\n\tfk_dm_region,\n\tfk_dm_skill,\n\tfk_dm_system,\n\tfk_dm_time_slot_client_local,\n\tfk_dm_time_slot_client_utc,\n\tfk_dm_time_slot_intern_local,\n\tfk_dm_time_slot_intern_utc,\n\tddm_ticket_id,\n\tis_abandoned_call_flag,\n\tis_handled_call_flag,\n\tis_handled_call_under_10sec_flag,\n\tis_call_placed_on_hold_flag,\n\tis_outbound_call_flag,\n\tis_transferred_call_external_flag,\n\tis_transferred_call_internal_flag,\n\tti_wrapup_time_automatic,\n\tti_talk_time_in,\n\tti_talk_time_out,\n\tti_hold_time_in,\n\tti_hold_time_out,\n\tti_internal_transfer_time,\n\tddm_employee_login\nFROM reg20_dtm_eng_dtm.ft_call;"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table reg20_dtm_eng_dtm.ft_call;",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_hdi_hive",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sqlserver_reg20_dtm_eng_dtm",
+						"type": "DatasetReference",
+						"parameters": {
+							"cw_table": "ft_call"
+						}
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "03_stg_dtm_loader"
+		},
+		"annotations": []
+	}
+}

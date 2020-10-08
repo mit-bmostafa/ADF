@@ -1,5 +1,5 @@
 {
-	"name": "11_conversation_poller",
+	"name": "13_performance_poller",
 	"properties": {
 		"description": "poller",
 		"activities": [
@@ -67,7 +67,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@and(equals(item().type, 'File'),startswith(item().name, 'ConversationReport') )",
+						"value": "@and(equals(item().type, 'File'),contains(item().name, 'performances') )",
 						"type": "Expression"
 					}
 				}
@@ -160,7 +160,7 @@
 											"type": "Expression"
 										},
 										"Directory": {
-											"value": "@concat(pipeline().parameters.ArchiveStore_Directory,'/', substring(split(split(item().name, '-')[2], '.')[0], 0, 6))",
+											"value": "@concat(pipeline().parameters.ArchiveStore_Directory,'/', replace(substring(item().name, 0, 7),'-',''))",
 											"type": "Expression"
 										},
 										"filename": "@item().name"
@@ -233,7 +233,10 @@
 											"value": "@pipeline().parameters.DestinationStore_Directory",
 											"type": "Expression"
 										},
-										"filename": "@item().name"
+										"filename": {
+											"value": "@concat(substring(item().name,0,10), '-performances.csv')",
+											"type": "Expression"
+										}
 									}
 								}
 							]
@@ -333,7 +336,7 @@
 								"value": "@pipeline().parameters.windowEnd",
 								"type": "Expression"
 							},
-							"wildcardFileName": "*"
+							"wildcardFileName": "*performances*"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings",
@@ -371,13 +374,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "sftp_source_ds",
+						"referenceName": "sftp_source_csv_ds",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "wabs_data_in_ds",
+						"referenceName": "wabs_data_in_csv_ds",
 						"type": "DatasetReference"
 					}
 				]
@@ -396,7 +399,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "wabs_reg20_dtm_emg_tmp_craw",
+						"referenceName": "wabs_reg20_dtm_emg_tmp_praw",
 						"type": "DatasetReference"
 					},
 					"enableLogging": false,
@@ -422,7 +425,7 @@
 			},
 			"DestinationStore_Directory": {
 				"type": "string",
-				"defaultValue": "warehouse/reg20_dtm_eng_tmp/raw_conversation_tbl"
+				"defaultValue": "warehouse/reg20_dtm_eng_tmp/raw_performance_tbl"
 			},
 			"ArchiveStore_Location": {
 				"type": "string",

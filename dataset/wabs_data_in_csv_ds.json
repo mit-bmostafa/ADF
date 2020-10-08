@@ -1,31 +1,23 @@
 {
-	"name": "wabs_warehouse_reg20_core",
+	"name": "wabs_data_in_csv_ds",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lksazureblobstorage",
 			"type": "LinkedServiceReference"
-		},
-		"parameters": {
-			"cw_fileName": {
-				"type": "String"
-			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": {
-					"value": "@dataset().cw_fileName",
-					"type": "Expression"
-				},
-				"folderPath": "warehouse/reg20_master_data_core",
-				"container": "hive"
+				"folderPath": "dtm_eng/in/100000_95",
+				"container": "data"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
-			"quoteChar": ""
+			"quoteChar": "\""
 		},
 		"schema": []
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
