@@ -374,7 +374,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "sftp_source_ds",
+						"referenceName": "sftp_source_csv_ds",
 						"type": "DatasetReference"
 					}
 				],
