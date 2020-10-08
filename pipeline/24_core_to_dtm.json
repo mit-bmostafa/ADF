@@ -117,6 +117,11 @@
 						"source": {
 							"table": "dm_employee"
 						}
+					},
+					{
+						"source": {
+							"table": "dm_system"
+						}
 					}
 				]
 			}
