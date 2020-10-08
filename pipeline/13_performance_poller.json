@@ -380,7 +380,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "wabs_data_in_ds",
+						"referenceName": "wabs_data_in_csv_ds",
 						"type": "DatasetReference"
 					}
 				]
