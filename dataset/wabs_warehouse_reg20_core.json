@@ -7,11 +7,11 @@
 		},
 		"parameters": {
 			"cw_fileName": {
-				"type": "String"
+				"type": "string"
 			}
 		},
 		"annotations": [],
-		"type": "DelimitedText",
+		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
@@ -22,9 +22,7 @@
 				"folderPath": "warehouse/reg20_master_data_core",
 				"container": "hive"
 			},
-			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"quoteChar": ""
+			"compressionCodec": "snappy"
 		},
 		"schema": []
 	}
