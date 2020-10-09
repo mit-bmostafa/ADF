@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "23_2_load_company",
+				"name": "Copy data1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -17,39 +17,37 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": {
-							"value": "SELECT cm.*\n  FROM [glb_master_data_core].[country] c\n  join [glb_master_data_core].[region] r on c.fk_region_id = r.id\n  join [glb_master_data_core].[company] cm on cm.fk_country_id = c.id\n  where r.region = 'FAB'",
-							"type": "Expression"
-						},
+						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "ParquetSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
-						},
-						"formatSettings": {
-							"type": "ParquetWriteSettings"
-						}
+						"type": "AzureSqlSink"
 					},
 					"enableStaging": false,
-					"validateDataConsistency": false
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "sqlserver_glb_master_data_core",
+						"referenceName": "sqlserver_reg20_dtm_eng_dtm",
 						"type": "DatasetReference",
 						"parameters": {
-							"cw_table": "company"
+							"cw_table": "ft_call"
 						}
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "wabs_warehouse_reg20_core",
+						"referenceName": "UAT_sqlserver_reg20_dtm_eng_dtm",
 						"type": "DatasetReference",
 						"parameters": {
-							"cw_fileName": "company/company.parquet"
+							"cw_table": "ft_call"
 						}
 					}
 				]
