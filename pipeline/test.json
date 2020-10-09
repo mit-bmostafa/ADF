@@ -21,7 +21,9 @@
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "AzureSqlSink"
+						"type": "AzureSqlSink",
+						"preCopyScript": "trunate table ft_call;",
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
