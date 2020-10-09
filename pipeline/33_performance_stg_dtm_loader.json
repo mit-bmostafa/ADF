@@ -83,7 +83,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "truncate table reg20_dtm_eng_dtm.ft_call;",
+						"preCopyScript": "truncate table reg20_dtm_eng_dtm.ft_call_agg_skill;",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
@@ -107,7 +107,7 @@
 						"referenceName": "sqlserver_reg20_dtm_eng_dtm",
 						"type": "DatasetReference",
 						"parameters": {
-							"cw_table": "ft_call"
+							"cw_table": "ft_call_agg_skill"
 						}
 					}
 				]
