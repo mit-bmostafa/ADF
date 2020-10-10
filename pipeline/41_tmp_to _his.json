@@ -20,6 +20,10 @@
 						"referenceName": "lksazureblobstorage",
 						"type": "LinkedServiceReference"
 					}
+				},
+				"linkedServiceName": {
+					"referenceName": "lkshdinsight",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
