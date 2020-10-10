@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Hive1",
+				"name": "his_af_mapping_company_siop_company",
 				"type": "HDInsightHive",
 				"dependsOn": [],
 				"policy": {
