@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "af_mapping_company_siop_company.csv",
+				"fileName": "*.csv",
 				"folderPath": "warehouse/reg20_dtm_eng_tmp/dim/tmp_af_mapping_company_siop_company",
 				"container": "hive"
 			},
