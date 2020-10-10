@@ -1,5 +1,5 @@
 {
-	"name": "wabs_warehouse_reg20_tmp__tmp_af_mapping_company_siop_company",
+	"name": "tmp_af_mapping_company_siop_compan",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "lk_hive_server",
