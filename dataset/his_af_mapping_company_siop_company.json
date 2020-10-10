@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "000000_0",
+				"fileName": "*",
 				"folderPath": "warehouse/reg20_dtm_eng_stg/his_af_mapping_company_siop_company/delta_0000001_0000001_0000",
 				"container": "hive"
 			},
