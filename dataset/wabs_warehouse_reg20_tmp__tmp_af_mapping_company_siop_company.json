@@ -1,0 +1,61 @@
+{
+	"name": "wabs_warehouse_reg20_tmp__tmp_af_mapping_company_siop_company",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazureblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "af_mapping_company_siop_company.csv",
+				"folderPath": "warehouse/reg20_dtm_eng_tmp/dim/tmp_af_mapping_company_siop_company",
+				"container": "hive"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "company_cd",
+				"type": "String"
+			},
+			{
+				"name": "company",
+				"type": "String"
+			},
+			{
+				"name": "region_cd",
+				"type": "String"
+			},
+			{
+				"name": "region",
+				"type": "String"
+			},
+			{
+				"name": "country_code",
+				"type": "String"
+			},
+			{
+				"name": "country",
+				"type": "String"
+			},
+			{
+				"name": "company_siop_code",
+				"type": "String"
+			},
+			{
+				"name": "company_siop",
+				"type": "String"
+			}
+		]
+	}
+}
