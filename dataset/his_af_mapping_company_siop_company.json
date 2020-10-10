@@ -1,0 +1,20 @@
+{
+	"name": "his_af_mapping_company_siop_company",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazureblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "warehouse/reg20_dtm_eng_stg/his_af_mapping_company_siop_company/delta_0000001_0000001_0000",
+				"container": "hive"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

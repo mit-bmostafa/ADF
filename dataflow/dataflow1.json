@@ -1,0 +1,83 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "wabs_warehouse_reg20_tmp__tmp_af_mapping_company_siop_company",
+						"type": "DatasetReference"
+					},
+					"name": "CompanySiopCompany",
+					"description": " Source employees file, changes every day"
+				},
+				{
+					"dataset": {
+						"referenceName": "his_af_mapping_company_siop_company",
+						"type": "DatasetReference"
+					},
+					"name": "HisCompanySiopCompany"
+				}
+			],
+			"sinks": [
+				{
+					"name": "sinkNew",
+					"description": " "
+				},
+				{
+					"name": "sinkUpdates",
+					"description": " "
+				},
+				{
+					"name": "sinkInactive",
+					"description": " Age out old rows"
+				}
+			],
+			"transformations": [
+				{
+					"name": "TypeConversionsAndSetAttrs"
+				},
+				{
+					"name": "LookupIDs"
+				},
+				{
+					"name": "ConditionalSplit1"
+				},
+				{
+					"name": "checkForChanges"
+				},
+				{
+					"name": "SetAttrsForNew"
+				},
+				{
+					"name": "SetAttrsInactive",
+					"description": "make iscurrent 0"
+				},
+				{
+					"name": "SetAttrsUpdate"
+				},
+				{
+					"name": "NormNames"
+				},
+				{
+					"name": "InactiveFields"
+				},
+				{
+					"name": "AlterRow1"
+				},
+				{
+					"name": "NullFilter",
+					"description": "Filter out NULLs from source file"
+				},
+				{
+					"name": "NameNorm2"
+				},
+				{
+					"name": "DerivedColumn1"
+				}
+			],
+			"script": "source(output(\n\t\tid as string,\n\t\tcompany_cd as string,\n\t\tcompany as string,\n\t\tregion_cd as string,\n\t\tregion as string,\n\t\tcountry_code as string,\n\t\tcountry as string,\n\t\tcompany_siop_code as string,\n\t\tcompany_siop as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tpurgeFiles: true,\n\twildcardPaths:['SampleData/Emps/today/*.csv']) ~> CompanySiopCompany\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> HisCompanySiopCompany\nNullFilter derive(processtime = currentTimestamp(),\n\t\tid = id,\n\t\tcompany_cd = company_cd,\n\t\tcompany = company,\n\t\tregion_cd = region_cd,\n\t\tregion = region,\n\t\tcountry_code = country_code,\n\t\tcountry = country,\n\t\tcompany_siop_code = company_siop_code,\n\t\tcompany_siop = company_siop) ~> TypeConversionsAndSetAttrs\nTypeConversionsAndSetAttrs, HisCompanySiopCompany lookup(TypeConversionsAndSetAttrs@id == TypeConversions@id,\n\tmultiple: true,\n\tbroadcast: 'auto')~> LookupIDs\nNormNames split(isNull(iscurrent),\n\tdisjoint: false) ~> ConditionalSplit1@(NewRow, CheckForUpdates)\nNameNorm2 exists(NameNorm2@EmpID == TypeConversions@EmpID &&\r\n\r\n(\r\n\r\nNameNorm2@Region != DimEmployees@Region ||\r\nNameNorm2@Role != DimEmployees@Role ||\r\nNameNorm2@Level != DimEmployees@Level ||\r\nNameNorm2@Status != DimEmployees@Status\r\n\r\n),\n\tnegate:false,\n\tbroadcast: 'auto')~> checkForChanges\nConditionalSplit1@NewRow derive(iscurrent = 1,\n\t\tsurrogatekey = toString(crc32(EmpID,EmpFunction))) ~> SetAttrsForNew\ncheckForChanges derive(iscurrent = 0) ~> SetAttrsInactive\ncheckForChanges derive(iscurrent = 1) ~> SetAttrsUpdate\nLookupIDs select(mapColumn(\n\t\tEmpID,\n\t\tRegion = {CompanySiopCompany@Region},\n\t\tStatus = {CompanySiopCompany@Status},\n\t\tLevel = {CompanySiopCompany@Level},\n\t\tRole = {CompanySiopCompany@Role},\n\t\tStartDate,\n\t\tEndDate,\n\t\tEmpFunction = Function,\n\t\tiscurrent,\n\t\tprocesstime,\n\t\tsurrogatekey\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> NormNames\nSetAttrsInactive select(mapColumn(\n\t\tEmpID,\n\t\tStatus,\n\t\tEndDate,\n\t\tiscurrent,\n\t\tprocesstime\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> InactiveFields\nInactiveFields alterRow(updateIf(true())) ~> AlterRow1\nCompanySiopCompany filter(!isNull(id)) ~> NullFilter\nConditionalSplit1@CheckForUpdates select(mapColumn(\n\t\tEmpID,\n\t\tRegion,\n\t\tStatus,\n\t\tLevel,\n\t\tRole,\n\t\tStartDate,\n\t\tEndDate,\n\t\tEmpFunction,\n\t\tiscurrent,\n\t\tprocesstime,\n\t\tsurrogatekey\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> NameNorm2\nHisCompanySiopCompany derive(column1 = ERROR_FUNCTION('')) ~> DerivedColumn1\nSetAttrsForNew sink(partitionBy('roundRobin', 4)) ~> sinkNew\nSetAttrsUpdate sink(partitionBy('roundRobin', 4)) ~> sinkUpdates\nAlterRow1 sink(mapColumn(\n\t\tEmpID,\n\t\tEndDate,\n\t\tiscurrent,\n\t\tprocesstime\n\t),\n\tpartitionBy('roundRobin', 4)) ~> sinkInactive"
+		}
+	}
+}

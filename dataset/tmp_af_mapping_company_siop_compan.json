@@ -1,0 +1,16 @@
+{
+	"name": "tmp_af_mapping_company_siop_compan",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lk_hive_server",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "HiveObject",
+		"schema": [],
+		"typeProperties": {
+			"schema": "reg20_master_data_tmp",
+			"table": "tmp_af_mapping_company_siop_company"
+		}
+	}
+}
