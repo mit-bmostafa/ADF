@@ -1,0 +1,241 @@
+{
+	"name": "pipeline3",
+	"properties": {
+		"activities": [
+			{
+				"name": "11_conversation_poller",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "11_conversation_poller",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "12_agent_poller",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "11_conversation_poller",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "12_agent_poller",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "13_performance_poller",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "12_agent_poller",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "13_performance_poller",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "21_file_loader",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "13_performance_poller",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "21_file_loader",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "22_dtm_loader",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "21_file_loader",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "22_dtm_loader",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "23_core_loader",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "22_dtm_loader",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "23_core_loader",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "24_core_to_dtm",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "23_core_loader",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "24_core_to_dtm",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "25_core_ss_loader",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "24_core_to_dtm",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "25_core_ss_loader",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "31_conversation_stg_dtm_loader",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "25_core_ss_loader",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "31_conversation_stg_dtm_loader",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "32_agent_stg_dtm_loader",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "31_conversation_stg_dtm_loader",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "32_agent_stg_dtm_loader",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "33_performance_stg_dtm_loader",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "32_agent_stg_dtm_loader",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "33_performance_stg_dtm_loader",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "41_tmp_to _his",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "33_performance_stg_dtm_loader",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "41_tmp_to _his",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": []
+	}
+}
