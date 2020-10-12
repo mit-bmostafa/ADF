@@ -23,7 +23,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "trunate table ft_call;",
+						"preCopyScript": "truncate table ft_call;",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
