@@ -333,7 +333,7 @@
 								"value": "@pipeline().parameters.windowEnd",
 								"type": "Expression"
 							},
-							"wildcardFileName": "*"
+							"wildcardFileName": "*Conversation*"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings",
