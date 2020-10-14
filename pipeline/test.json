@@ -17,7 +17,6 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from ft_call where fk_dm_date >= 20200900 and fk_dm_date < 20201000;",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
