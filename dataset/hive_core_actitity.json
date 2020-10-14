@@ -1,0 +1,20 @@
+{
+	"name": "hive_core_actitity",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazureblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "warehouse/reg20_master_data_core/activity",
+				"container": "hive"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
