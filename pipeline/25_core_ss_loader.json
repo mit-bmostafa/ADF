@@ -121,6 +121,11 @@
 						"source": {
 							"table": "country"
 						}
+					},
+					{
+						"source": {
+							"table": "lt_employee_hierarchy_functional"
+						}
 					}
 				]
 			}
