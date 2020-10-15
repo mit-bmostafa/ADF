@@ -1,9 +1,9 @@
 {
-	"name": "test",
+	"name": "fc_call_devbi_to_uat",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "ft_call_devbi_to_uat",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
