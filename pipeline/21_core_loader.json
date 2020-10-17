@@ -273,6 +273,14 @@
 						"destination": {
 							"fileName": "country/country.parquet"
 						}
+					},
+					{
+						"source": {
+							"table": "site"
+						},
+						"destination": {
+							"fileName": "site/site.parquet"
+						}
 					}
 				]
 			}
