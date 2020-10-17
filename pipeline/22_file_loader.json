@@ -348,10 +348,10 @@
 					},
 					{
 						"source": {
-							"filename": "siop_master_data_employee_site.csv"
+							"filename": "af_mapping_employee_site.csv"
 						},
 						"destination": {
-							"directory": "siop_master_data_employee_site"
+							"directory": "tmp_af_mapping_employee_site"
 						}
 					}
 				]
