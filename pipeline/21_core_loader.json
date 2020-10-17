@@ -180,6 +180,9 @@
 												}
 											}
 										]
+									},
+									{
+										"value": "site"
 									}
 								],
 								"defaultActivities": [
