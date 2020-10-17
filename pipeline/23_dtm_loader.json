@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "22_1_loop_dtm_tables",
+				"name": "23_1_loop_dtm_tables",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
@@ -76,11 +76,11 @@
 				}
 			},
 			{
-				"name": "22_2_hive_to_dtm",
+				"name": "23_2_hive_to_dtm",
 				"type": "HDInsightHive",
 				"dependsOn": [
 					{
-						"activity": "22_1_loop_dtm_tables",
+						"activity": "23_1_loop_dtm_tables",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -107,11 +107,11 @@
 				}
 			},
 			{
-				"name": "22_3_hive_to_sqlserver",
+				"name": "23_3_hive_to_sqlserver",
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "22_2_hive_to_dtm",
+						"activity": "23_2_hive_to_dtm",
 						"dependencyConditions": [
 							"Succeeded"
 						]
