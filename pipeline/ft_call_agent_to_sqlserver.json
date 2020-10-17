@@ -1,9 +1,9 @@
 {
-	"name": "pipeline1",
+	"name": "ft_call_agent_to_sqlserver",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "31_3_hive_to_sqlserver",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -15,15 +15,38 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"sink": {
-						"type": "AzureSqlSink"
+					"source": {
+						"type": "HiveSource",
+						"query": "SELECT \n\tfk_dm_date,\n\tfk_dm_client,\n\tfk_dm_employee_csr,\n\tfk_dm_employee_supervisor,\n\tfk_dm_media_channel,\n\tfk_dm_system,\n\tti_availability_time,\n\tti_wrapup_time_manual,\n\tddm_employee_login\nFROM reg20_dtm_eng_dtm.ft_call_agent_activity;"
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "truncate table reg20_dtm_eng_dtm.ft_call_agent_activity;",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
+				"inputs": [
+					{
+						"referenceName": "ds_hdi_hive",
+						"type": "DatasetReference"
+					}
+				],
 				"outputs": [
 					{
-						"referenceName": "sqlserver_glb_master_data_dtm",
-						"type": "DatasetReference"
+						"referenceName": "sqlserver_reg20_dtm_eng_dtm",
+						"type": "DatasetReference",
+						"parameters": {
+							"cw_table": "ft_call_agent_activity"
+						}
 					}
 				]
 			}
