@@ -345,6 +345,14 @@
 						"destination": {
 							"directory": "tmp_master_data_employee_hierarchy_functional"
 						}
+					},
+					{
+						"source": {
+							"filename": "siop_master_data_employee_site.csv"
+						},
+						"destination": {
+							"directory": "siop_master_data_employee_site"
+						}
 					}
 				]
 			}
