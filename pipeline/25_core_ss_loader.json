@@ -126,6 +126,11 @@
 						"source": {
 							"table": "lt_employee_hierarchy_functional"
 						}
+					},
+					{
+						"source": {
+							"table": "lt_employee_site"
+						}
 					}
 				]
 			}
