@@ -60,8 +60,11 @@
 									"parameters": {
 										"container": "data",
 										"directory": "dtm_eng/ref",
-										"filename": "@item().source.filename",
-										"sheet": "0"
+										"filename": {
+											"value": "@item().source.filename",
+											"type": "Expression"
+										},
+										"sheet": "Sheet1"
 									}
 								}
 							],
@@ -72,7 +75,10 @@
 									"parameters": {
 										"container": "hive",
 										"directory": "@concat('warehouse/reg20_master_data_tmp/', item().destination.directory)",
-										"filename": "@concat(item().destination.directory, 'csv')"
+										"filename": {
+											"value": "@item().source.filename",
+											"type": "Expression"
+										}
 									}
 								}
 							]
