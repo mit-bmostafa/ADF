@@ -268,7 +268,7 @@
 				"defaultValue": [
 					{
 						"source": {
-							"filename": "af_activity.csv"
+							"filename": "af_activity.TXT"
 						},
 						"destination": {
 							"directory": "tmp_af_activity"
@@ -276,7 +276,7 @@
 					},
 					{
 						"source": {
-							"filename": "af_skill.csv"
+							"filename": "af_skill.TXT"
 						},
 						"destination": {
 							"directory": "tmp_af_skill"
@@ -284,7 +284,7 @@
 					},
 					{
 						"source": {
-							"filename": "af_mapping_activity_sublob.csv"
+							"filename": "af_mapping_activity_sublob.TXT"
 						},
 						"destination": {
 							"directory": "tmp_af_mapping_activity_sublob"
@@ -292,7 +292,7 @@
 					},
 					{
 						"source": {
-							"filename": "af_mapping_company_siop_company.csv"
+							"filename": "af_mapping_company_siop_company.TXT"
 						},
 						"destination": {
 							"directory": "tmp_af_mapping_company_siop_company"
@@ -300,7 +300,7 @@
 					},
 					{
 						"source": {
-							"filename": "af_mapping_skill_activity.csv"
+							"filename": "af_mapping_skill_activity.TXT"
 						},
 						"destination": {
 							"directory": "tmp_af_mapping_skill_activity"
@@ -308,7 +308,7 @@
 					},
 					{
 						"source": {
-							"filename": "af_mapping_system_siop_system.csv"
+							"filename": "af_mapping_system_siop_system.TXT"
 						},
 						"destination": {
 							"directory": "tmp_af_mapping_system_siop_system"
@@ -316,7 +316,7 @@
 					},
 					{
 						"source": {
-							"filename": "af_mapping_skill_genesys_skill.csv"
+							"filename": "af_mapping_skill_genesys_skill.TXT"
 						},
 						"destination": {
 							"directory": "tmp_af_mapping_skill_genesys_skill"
