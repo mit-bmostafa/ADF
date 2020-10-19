@@ -284,7 +284,7 @@
 					},
 					{
 						"source": {
-							"filename": "af_mapping_activity_sublob.TXT"
+							"filename": "af_mapping_activity_lob.TXT"
 						},
 						"destination": {
 							"directory": "tmp_af_mapping_activity_sublob"
@@ -300,18 +300,10 @@
 					},
 					{
 						"source": {
-							"filename": "af_mapping_skill_activity.TXT"
+							"filename": "af_skill_activity.TXT"
 						},
 						"destination": {
 							"directory": "tmp_af_mapping_skill_activity"
-						}
-					},
-					{
-						"source": {
-							"filename": "af_mapping_system_siop_system.TXT"
-						},
-						"destination": {
-							"directory": "tmp_af_mapping_system_siop_system"
 						}
 					},
 					{
