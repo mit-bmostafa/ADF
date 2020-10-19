@@ -76,7 +76,7 @@
 											"type": "Expression"
 										},
 										"filename": {
-											"value": "@item().source.filename",
+											"value": "@replace(item().source.filename, '.TXT', '.csv')",
 											"type": "Expression"
 										}
 									}
