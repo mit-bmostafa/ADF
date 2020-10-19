@@ -1,0 +1,36 @@
+{
+	"name": "wabs_data_source_excel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazureblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"container": {
+				"type": "string"
+			},
+			"directory": {
+				"type": "string"
+			},
+			"filename": {
+				"type": "string"
+			},
+			"sheet": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "@item().source.sheet",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "@item().source.filename",
+				"folderPath": "dtm_eng/ref",
+				"container": "data"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	}
+}
