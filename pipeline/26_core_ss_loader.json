@@ -70,6 +70,21 @@
 				"defaultValue": [
 					{
 						"source": {
+							"table": "system"
+						}
+					},
+					{
+						"source": {
+							"table": "activity"
+						}
+					},
+					{
+						"source": {
+							"table": "skill"
+						}
+					},
+					{
+						"source": {
 							"table": "lob"
 						}
 					},
@@ -80,27 +95,12 @@
 					},
 					{
 						"source": {
-							"table": "skill"
-						}
-					},
-					{
-						"source": {
-							"table": "activity"
-						}
-					},
-					{
-						"source": {
 							"table": "lt_skill_activity"
 						}
 					},
 					{
 						"source": {
 							"table": "lt_activity_sublob"
-						}
-					},
-					{
-						"source": {
-							"table": "system"
 						}
 					},
 					{
