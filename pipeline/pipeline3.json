@@ -89,7 +89,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "23_dtm_loader",
+						"referenceName": "24_dtm_loader",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
@@ -129,7 +129,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "24_core_to_dtm",
+						"referenceName": "25_core_to_dtm",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
@@ -149,7 +149,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "25_core_ss_loader",
+						"referenceName": "26_core_ss_loader",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
