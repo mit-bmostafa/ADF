@@ -200,7 +200,22 @@
 										]
 									},
 									{
-										"value": "site"
+										"value": "site",
+										"activities": [
+											{
+												"name": "set_site_copy",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "SELECT *\n  FROM [reg20_master_data_core].[site]",
+														"type": "Expression"
+													}
+												}
+											}
+										]
 									}
 								],
 								"defaultActivities": [
