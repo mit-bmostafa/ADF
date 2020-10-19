@@ -22,12 +22,11 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "@item().source.sheet",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "@item().source.filename",
-				"folderPath": "dtm_eng/ref",
-				"container": "data"
+				"fileName": "@dataset().filename",
+				"folderPath": "@{dataset().directory}",
+				"container": "@{dataset().container}"
 			},
 			"firstRowAsHeader": true
 		},
