@@ -37,8 +37,7 @@
 									"type": "BinarySource",
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
-										"recursive": true,
-										"deleteFilesAfterCompletion": false
+										"recursive": true
 									},
 									"formatSettings": {
 										"type": "BinaryReadSettings"
@@ -269,10 +268,58 @@
 				"defaultValue": [
 					{
 						"source": {
-							"filename": "af_activity*.csv"
+							"filename": "af_activity.csv"
 						},
 						"destination": {
 							"directory": "tmp_af_activity"
+						}
+					},
+					{
+						"source": {
+							"filename": "af_skill.csv"
+						},
+						"destination": {
+							"directory": "tmp_af_skill"
+						}
+					},
+					{
+						"source": {
+							"filename": "af_mapping_activity_sublob.csv"
+						},
+						"destination": {
+							"directory": "tmp_af_mapping_activity_sublob"
+						}
+					},
+					{
+						"source": {
+							"filename": "af_mapping_company_siop_company.csv"
+						},
+						"destination": {
+							"directory": "tmp_af_mapping_company_siop_company"
+						}
+					},
+					{
+						"source": {
+							"filename": "af_mapping_skill_activity.csv"
+						},
+						"destination": {
+							"directory": "tmp_af_mapping_skill_activity"
+						}
+					},
+					{
+						"source": {
+							"filename": "af_mapping_system_siop_system.csv"
+						},
+						"destination": {
+							"directory": "tmp_af_mapping_system_siop_system"
+						}
+					},
+					{
+						"source": {
+							"filename": "af_mapping_skill_genesys_skill.csv"
+						},
+						"destination": {
+							"directory": "tmp_af_mapping_skill_genesys_skill"
 						}
 					}
 				]
