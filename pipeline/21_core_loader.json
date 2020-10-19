@@ -203,7 +203,7 @@
 										"value": "site",
 										"activities": [
 											{
-												"name": "set_site_copy",
+												"name": "set_site_query",
 												"type": "SetVariable",
 												"dependsOn": [],
 												"userProperties": [],
