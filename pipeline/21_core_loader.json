@@ -294,6 +294,14 @@
 					},
 					{
 						"source": {
+							"table": "company"
+						},
+						"destination": {
+							"fileName": "company/company.parquet"
+						}
+					},
+					{
+						"source": {
 							"table": "site"
 						},
 						"destination": {
