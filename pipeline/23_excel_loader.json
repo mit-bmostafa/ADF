@@ -76,7 +76,7 @@
 										"container": "hive",
 										"directory": "@concat('warehouse/reg20_master_data_tmp/', item().destination.directory)",
 										"filename": {
-											"value": "@item().source.filename",
+											"value": "@replace(item().source.filename, '.xlsx', '.csv')",
 											"type": "Expression"
 										}
 									}
