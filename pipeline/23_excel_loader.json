@@ -34,163 +34,48 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "BinarySource",
+									"type": "ExcelSource",
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true
-									},
-									"formatSettings": {
-										"type": "BinaryReadSettings"
 									}
 								},
 								"sink": {
-									"type": "BinarySink",
+									"type": "DelimitedTextSink",
 									"storeSettings": {
 										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
 									}
 								},
 								"enableStaging": false
 							},
 							"inputs": [
 								{
-									"referenceName": "wabs_data_source_file",
+									"referenceName": "wabs_data_source_excel",
 									"type": "DatasetReference",
 									"parameters": {
-										"Container": "data",
-										"Directory": "dtm_eng/ref",
-										"filename": {
-											"value": "@item().source.filename",
-											"type": "Expression"
-										}
+										"container": "data",
+										"directory": "dtm_eng/ref",
+										"filename": "@item().source.filename",
+										"sheet": "1"
 									}
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "wabs_data_destination",
+									"referenceName": "wabs_data_destination_csv",
 									"type": "DatasetReference",
 									"parameters": {
-										"Container": "hive",
-										"Directory": {
-											"value": "@concat('warehouse/reg20_master_data_tmp/', item().destination.directory)",
-											"type": "Expression"
-										},
-										"filename": {
-											"value": "@item().source.filename",
-											"type": "Expression"
-										}
+										"container": "hive",
+										"directory": "@concat('warehouse/reg20_master_data_tmp/', item().destination.directory)",
+										"filename": "@concat(item().destination.directory, 'csv')"
 									}
 								}
 							]
-						},
-						{
-							"name": "21_1_2_file_to_archive",
-							"type": "Copy",
-							"dependsOn": [
-								{
-									"activity": "21_1_1_file_to_warehouse",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"source": {
-									"type": "BinarySource",
-									"storeSettings": {
-										"type": "AzureBlobStorageReadSettings",
-										"recursive": true
-									},
-									"formatSettings": {
-										"type": "BinaryReadSettings"
-									}
-								},
-								"sink": {
-									"type": "BinarySink",
-									"storeSettings": {
-										"type": "AzureBlobStorageWriteSettings"
-									}
-								},
-								"enableStaging": false
-							},
-							"inputs": [
-								{
-									"referenceName": "wabs_data_source_file",
-									"type": "DatasetReference",
-									"parameters": {
-										"Container": "data",
-										"Directory": "dtm_eng/ref",
-										"filename": {
-											"value": "@item().source.filename",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "wabs_data_destination",
-									"type": "DatasetReference",
-									"parameters": {
-										"Container": "data",
-										"Directory": {
-											"value": "@concat('dtm_eng/out/archive/ref/' ,replace(substring(getPastTime(0, 'Day'),0,10), '-', ''))",
-											"type": "Expression"
-										},
-										"filename": {
-											"value": "@item().source.filename",
-											"type": "Expression"
-										}
-									}
-								}
-							]
-						},
-						{
-							"name": "21_1_3_file_to_trash",
-							"type": "Delete",
-							"dependsOn": [
-								{
-									"activity": "21_1_2_file_to_archive",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"dataset": {
-									"referenceName": "wabs_data_source_file",
-									"type": "DatasetReference",
-									"parameters": {
-										"Container": "data",
-										"Directory": "dtm_eng/ref",
-										"filename": {
-											"value": "@item().source.filename",
-											"type": "Expression"
-										}
-									}
-								},
-								"enableLogging": false,
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true
-								}
-							}
 						},
 						{
 							"name": "21_1_0_clean_warehouse",
@@ -229,37 +114,6 @@
 						}
 					]
 				}
-			},
-			{
-				"name": "21_2_tmp_to_core",
-				"type": "HDInsightHive",
-				"dependsOn": [
-					{
-						"activity": "21_1_loop_files",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"scriptPath": "hive/scripts/reg20_master_data_core.hql",
-					"scriptLinkedService": {
-						"referenceName": "lksazureblobstorage",
-						"type": "LinkedServiceReference"
-					}
-				},
-				"linkedServiceName": {
-					"referenceName": "lkshdinsight",
-					"type": "LinkedServiceReference"
-				}
 			}
 		],
 		"parameters": {
@@ -268,7 +122,7 @@
 				"defaultValue": [
 					{
 						"source": {
-							"filename": "glu_master_data_login_*.xlsx"
+							"filename": "glu_master_data_login.xlsx"
 						},
 						"destination": {
 							"directory": "tmp_master_data_login_employee"
@@ -276,7 +130,7 @@
 					},
 					{
 						"source": {
-							"filename": "siop_master_data_employee_*.xlsx"
+							"filename": "siop_master_data_employee.xlsx"
 						},
 						"destination": {
 							"directory": "tmp_master_data_employee"
@@ -284,7 +138,7 @@
 					},
 					{
 						"source": {
-							"filename": "siop_master_data_employee_hierarchy_functional_*.xlsx"
+							"filename": "siop_master_data_employee_hierarchy_functional.xlsx"
 						},
 						"destination": {
 							"directory": "tmp_master_data_employee_hierarchy_functional"
