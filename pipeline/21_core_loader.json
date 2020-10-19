@@ -182,22 +182,25 @@
 										]
 									},
 									{
-										"value": "site",
+										"value": "city",
 										"activities": [
 											{
-												"name": "set_site_query",
+												"name": "set_city_query",
 												"type": "SetVariable",
 												"dependsOn": [],
 												"userProperties": [],
 												"typeProperties": {
 													"variableName": "core_query",
 													"value": {
-														"value": "SELECT *\n  FROM [reg20_master_data_core].[site]",
+														"value": "SELECT *\n  FROM [reg20_master_data_core].[city]",
 														"type": "Expression"
 													}
 												}
 											}
 										]
+									},
+									{
+										"value": "site"
 									}
 								],
 								"defaultActivities": [
