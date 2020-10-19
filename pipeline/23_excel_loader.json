@@ -14,11 +14,11 @@
 					},
 					"activities": [
 						{
-							"name": "21_1_1_file_to_warehouse",
+							"name": "23_1_1_file_to_warehouse",
 							"type": "Copy",
 							"dependsOn": [
 								{
-									"activity": "21_1_0_clean_warehouse",
+									"activity": "23_1_0_clean_warehouse",
 									"dependencyConditions": [
 										"Succeeded"
 									]
@@ -84,7 +84,7 @@
 							]
 						},
 						{
-							"name": "21_1_0_clean_warehouse",
+							"name": "23_1_0_clean_warehouse",
 							"type": "Delete",
 							"dependsOn": [],
 							"policy": {
@@ -105,6 +105,115 @@
 											"value": "@concat('warehouse/reg20_master_data_tmp/', item().destination.directory)",
 											"type": "Expression"
 										},
+										"filename": {
+											"value": "@item().source.filename",
+											"type": "Expression"
+										}
+									}
+								},
+								"enableLogging": false,
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								}
+							}
+						},
+						{
+							"name": "23_1_2_file_to_archive",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "23_1_1_file_to_warehouse",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "wabs_data_source_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": "data",
+										"Directory": "dtm_eng/ref",
+										"filename": {
+											"value": "@item().source.filename",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "wabs_data_destination",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": "data",
+										"Directory": {
+											"value": "@concat('dtm_eng/out/archive/ref/' ,replace(substring(getPastTime(0, 'Day'),0,10), '-', ''))",
+											"type": "Expression"
+										},
+										"filename": {
+											"value": "@item().source.filename",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "23_1_3_file_to_trash",
+							"type": "Delete",
+							"dependsOn": [
+								{
+									"activity": "23_1_2_file_to_archive",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "wabs_data_source_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"Container": "data",
+										"Directory": "dtm_eng/ref",
 										"filename": {
 											"value": "@item().source.filename",
 											"type": "Expression"
