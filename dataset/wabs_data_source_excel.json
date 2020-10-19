@@ -22,12 +22,24 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "@dataset().sheet",
+			"sheetName": {
+				"value": "@dataset().sheet",
+				"type": "Expression"
+			},
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "@dataset().filename",
-				"folderPath": "@dataset().directory",
-				"container": "@dataset().container"
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().directory",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().container",
+					"type": "Expression"
+				}
 			},
 			"firstRowAsHeader": true
 		},
