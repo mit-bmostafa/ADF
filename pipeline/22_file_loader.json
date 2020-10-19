@@ -313,6 +313,14 @@
 						"destination": {
 							"directory": "tmp_af_mapping_skill_genesys_skill"
 						}
+					},
+					{
+						"source": {
+							"filename": "af_mapping_time_slot.TXT"
+						},
+						"destination": {
+							"directory": "tmp_af_mapping_time_slot"
+						}
 					}
 				]
 			}
