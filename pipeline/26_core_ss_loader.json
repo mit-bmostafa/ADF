@@ -89,7 +89,7 @@
 							"table": "skill",
 							"parent1": "skill",
 							"parent2": "skill",
-							"parent3": "skill"
+							"parent3": "lt_employee_site"
 						}
 					},
 					{
