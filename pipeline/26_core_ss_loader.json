@@ -70,6 +70,16 @@
 				"defaultValue": [
 					{
 						"source": {
+							"table": "lt_skill_activity"
+						}
+					},
+					{
+						"source": {
+							"table": "lt_activity_sublob"
+						}
+					},
+					{
+						"source": {
 							"table": "system"
 						}
 					},
@@ -85,22 +95,12 @@
 					},
 					{
 						"source": {
-							"table": "lob"
-						}
-					},
-					{
-						"source": {
 							"table": "sub_lob"
 						}
 					},
 					{
 						"source": {
-							"table": "lt_skill_activity"
-						}
-					},
-					{
-						"source": {
-							"table": "lt_activity_sublob"
+							"table": "lob"
 						}
 					},
 					{
@@ -110,12 +110,12 @@
 					},
 					{
 						"source": {
-							"table": "employee"
+							"table": "login_employee"
 						}
 					},
 					{
 						"source": {
-							"table": "login_employee"
+							"table": "employee"
 						}
 					},
 					{
