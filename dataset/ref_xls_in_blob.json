@@ -26,7 +26,7 @@
 					"value": "@dataset().filename",
 					"type": "Expression"
 				},
-				"folderPath": "dtm_eng",
+				"folderPath": "dtm_eng/ref",
 				"container": "data"
 			},
 			"firstRowAsHeader": true
