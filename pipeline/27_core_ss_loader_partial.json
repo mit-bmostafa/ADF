@@ -70,14 +70,6 @@
 				"defaultValue": [
 					{
 						"source": {
-							"table": "system",
-							"parent1": "system",
-							"parent2": "system",
-							"parent3": "system"
-						}
-					},
-					{
-						"source": {
 							"table": "activity",
 							"parent1": "lt_skill_activity",
 							"parent2": "lt_activity_sublob",
@@ -90,30 +82,6 @@
 							"parent1": "skill",
 							"parent2": "skill",
 							"parent3": "lt_employee_site"
-						}
-					},
-					{
-						"source": {
-							"table": "company",
-							"parent1": "employee",
-							"parent2": "login_employee",
-							"parent3": "lt_employee_hierarchy_functional"
-						}
-					},
-					{
-						"source": {
-							"table": "employee",
-							"parent1": "login_employee",
-							"parent2": "lt_employee_hierarchy_functional",
-							"parent3": "lt_employee_hierarchy_functional"
-						}
-					},
-					{
-						"source": {
-							"table": "login_employee",
-							"parent1": "login_employee",
-							"parent2": "login_employee",
-							"parent3": "login_employee"
 						}
 					},
 					{
@@ -146,22 +114,6 @@
 							"parent1": "lt_activity_sublob",
 							"parent2": "lt_activity_sublob",
 							"parent3": "lt_activity_sublob"
-						}
-					},
-					{
-						"source": {
-							"table": "lt_employee_hierarchy_functional",
-							"parent1": "lt_employee_hierarchy_functional",
-							"parent2": "lt_employee_hierarchy_functional",
-							"parent3": "lt_employee_hierarchy_functional"
-						}
-					},
-					{
-						"source": {
-							"table": "lt_employee_site",
-							"parent1": "lt_employee_site",
-							"parent2": "lt_employee_site",
-							"parent3": "lt_employee_site"
 						}
 					}
 				]
