@@ -85,7 +85,7 @@
 					{
 						"source": {
 							"table": "skill",
-							"parent1": "lt_skill_activity"
+							"parent1": "skill"
 						}
 					},
 					{
