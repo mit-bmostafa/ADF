@@ -88,8 +88,8 @@
 						"source": {
 							"table": "lob",
 							"parent1": "sub_lob",
-							"parent2": "lob",
-							"parent3": "lob"
+							"parent2": "sub_lob",
+							"parent3": "sub_lob"
 						}
 					},
 					{
