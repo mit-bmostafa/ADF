@@ -120,6 +120,11 @@
 					},
 					{
 						"source": {
+							"table": "dm_time_slot"
+						}
+					},
+					{
+						"source": {
 							"table": "dm_system"
 						}
 					}
