@@ -8,13 +8,24 @@
 		"parameters": {
 			"worksheet": {
 				"type": "String"
+			},
+			"filename": {
+				"type": "String"
 			}
 		},
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": {
+				"value": "@dataset().worksheet",
+				"type": "Expression"
+			},
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
 				"folderPath": "dtm_eng",
 				"container": "data"
 			},
