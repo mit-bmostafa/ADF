@@ -37,7 +37,7 @@
 								"sink": {
 									"type": "AzureSqlSink",
 									"preCopyScript": {
-										"value": "@{concat('delete from reg20_master_data_core.', item().source.table)};\n@{concat('delete from reg20_master_data_core.', item().source.parent1)};\n@{concat('delete from reg20_master_data_core.', item().source.parent2)};\n@{concat('delete from reg20_master_data_core.', item().source.parent3)};",
+										"value": "@{concat('delete from reg20_master_data_core.', item().source.parent3)};\n@{concat('delete from reg20_master_data_core.', item().source.parent2)};\n@{concat('delete from reg20_master_data_core.', item().source.parent1)};\n@{concat('delete from reg20_master_data_core.', item().source.table)};",
 										"type": "Expression"
 									},
 									"disableMetricsCollection": false
