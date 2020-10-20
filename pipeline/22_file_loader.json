@@ -90,7 +90,7 @@
 												"storeSettings": {
 													"type": "AzureBlobStorageReadSettings",
 													"recursive": true,
-													"wildcardFileName": "*",
+													"wildcardFileName": "*.TXT",
 													"deleteFilesAfterCompletion": false
 												},
 												"formatSettings": {
