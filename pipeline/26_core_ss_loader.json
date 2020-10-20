@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "25_1_hive_to_sqlserver",
+				"name": "25_1_hive_to_sqlserver_copy1",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
@@ -15,7 +15,7 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "25_3_1_copy_core_tables",
+							"name": "25_3_1_copy_core_tables_copy1",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -70,62 +70,85 @@
 				"defaultValue": [
 					{
 						"source": {
-							"table": "lt_skill_activity"
+							"table": "system",
+							"parent1": "system",
+							"parent2": "system"
 						}
 					},
 					{
 						"source": {
-							"table": "lt_activity_sublob"
+							"table": "activity",
+							"parent1": "lt_skill_activity",
+							"parent2": "lt_activity_sublob"
 						}
 					},
 					{
 						"source": {
-							"table": "system"
+							"table": "skill",
+							"parent1": "lt_skill_activity"
 						}
 					},
 					{
 						"source": {
-							"table": "activity"
+							"table": "company",
+							"parent1": "company",
+							"parent2": "company"
 						}
 					},
 					{
 						"source": {
-							"table": "skill"
+							"table": "employee",
+							"parent1": "login_employee",
+							"parent2": "lt_employee_hierarchy_functional"
 						}
 					},
 					{
 						"source": {
-							"table": "sub_lob"
+							"table": "login_employee",
+							"parent1": "login_employee",
+							"parent2": "login_employee"
 						}
 					},
 					{
 						"source": {
-							"table": "lob"
+							"table": "lob",
+							"parent1": "sub_lob",
+							"parent2": "lob"
 						}
 					},
 					{
 						"source": {
-							"table": "company"
+							"table": "sub_lob",
+							"parent1": "sub_lob",
+							"parent2": "sub_lob"
 						}
 					},
 					{
 						"source": {
-							"table": "login_employee"
+							"table": "lt_skill_activity",
+							"parent1": "lt_skill_activity",
+							"parent2": "lt_skill_activity"
 						}
 					},
 					{
 						"source": {
-							"table": "employee"
+							"table": "lt_activity_sublob",
+							"parent1": "lt_activity_sublob",
+							"parent2": "lt_activity_sublob"
 						}
 					},
 					{
 						"source": {
-							"table": "lt_employee_hierarchy_functional"
+							"table": "lt_employee_hierarchy_functional",
+							"parent1": "lt_employee_hierarchy_functional",
+							"parent2": "lt_employee_hierarchy_functional"
 						}
 					},
 					{
 						"source": {
-							"table": "lt_employee_site"
+							"table": "lt_employee_site",
+							"parent1": "lt_employee_site",
+							"parent2": "lt_employee_site"
 						}
 					}
 				]
