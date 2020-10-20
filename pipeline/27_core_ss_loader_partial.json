@@ -1,0 +1,175 @@
+{
+	"name": "27_core_ss_loader_partial",
+	"properties": {
+		"activities": [
+			{
+				"name": "25_1_hive_to_sqlserver_copy1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "25_3_1_copy_core_tables_copy1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "HiveSource",
+									"query": {
+										"value": "@concat('select * from reg20_master_data_core.', item().source.table)",
+										"type": "Expression"
+									}
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"preCopyScript": {
+										"value": "@{concat('delete from reg20_master_data_core.', item().source.parent3)};\n@{concat('delete from reg20_master_data_core.', item().source.parent2)};\n@{concat('delete from reg20_master_data_core.', item().source.parent1)};\n@{concat('delete from reg20_master_data_core.', item().source.table)};",
+										"type": "Expression"
+									},
+									"disableMetricsCollection": false
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_hdi_hive",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "sqlserver_reg20_master_data_core",
+									"type": "DatasetReference",
+									"parameters": {
+										"dw_table": "@item().source.table"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"source": {
+							"table": "system",
+							"parent1": "system",
+							"parent2": "system",
+							"parent3": "system"
+						}
+					},
+					{
+						"source": {
+							"table": "activity",
+							"parent1": "lt_skill_activity",
+							"parent2": "lt_activity_sublob",
+							"parent3": "lt_activity_sublob"
+						}
+					},
+					{
+						"source": {
+							"table": "skill",
+							"parent1": "skill",
+							"parent2": "skill",
+							"parent3": "lt_employee_site"
+						}
+					},
+					{
+						"source": {
+							"table": "company",
+							"parent1": "employee",
+							"parent2": "login_employee",
+							"parent3": "lt_employee_hierarchy_functional"
+						}
+					},
+					{
+						"source": {
+							"table": "employee",
+							"parent1": "login_employee",
+							"parent2": "lt_employee_hierarchy_functional",
+							"parent3": "lt_employee_hierarchy_functional"
+						}
+					},
+					{
+						"source": {
+							"table": "login_employee",
+							"parent1": "login_employee",
+							"parent2": "login_employee",
+							"parent3": "login_employee"
+						}
+					},
+					{
+						"source": {
+							"table": "lob",
+							"parent1": "sub_lob",
+							"parent2": "lob",
+							"parent3": "lob"
+						}
+					},
+					{
+						"source": {
+							"table": "sub_lob",
+							"parent1": "sub_lob",
+							"parent2": "sub_lob",
+							"parent3": "sub_lob"
+						}
+					},
+					{
+						"source": {
+							"table": "lt_skill_activity",
+							"parent1": "lt_skill_activity",
+							"parent2": "lt_skill_activity",
+							"parent3": "lt_skill_activity"
+						}
+					},
+					{
+						"source": {
+							"table": "lt_activity_sublob",
+							"parent1": "lt_activity_sublob",
+							"parent2": "lt_activity_sublob",
+							"parent3": "lt_activity_sublob"
+						}
+					},
+					{
+						"source": {
+							"table": "lt_employee_hierarchy_functional",
+							"parent1": "lt_employee_hierarchy_functional",
+							"parent2": "lt_employee_hierarchy_functional",
+							"parent3": "lt_employee_hierarchy_functional"
+						}
+					},
+					{
+						"source": {
+							"table": "lt_employee_site",
+							"parent1": "lt_employee_site",
+							"parent2": "lt_employee_site",
+							"parent3": "lt_employee_site"
+						}
+					}
+				]
+			}
+		},
+		"folder": {
+			"name": "02_dim_loader"
+		},
+		"annotations": []
+	}
+}
