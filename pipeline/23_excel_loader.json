@@ -32,11 +32,11 @@
 								},
 								"ifTrueActivities": [
 									{
-										"name": "23_1_1_file_to_warehouse",
+										"name": "23_2_1_2_file_to_warehouse",
 										"type": "Copy",
 										"dependsOn": [
 											{
-												"activity": "23_2_1_1_file_to_trash",
+												"activity": "23_2_1_1_clean_warehouse",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -56,7 +56,11 @@
 												"storeSettings": {
 													"type": "AzureBlobStorageReadSettings",
 													"recursive": true,
-													"wildcardFileName": "*"
+													"wildcardFolderPath": "dtm_eng/ref",
+													"wildcardFileName": {
+														"value": "@concat(item().source.filename, '*')",
+														"type": "Expression"
+													}
 												}
 											},
 											"sink": {
@@ -103,16 +107,9 @@
 										]
 									},
 									{
-										"name": "23_1_0_clean_warehouse",
+										"name": "23_2_1_1_clean_warehouse",
 										"type": "Delete",
-										"dependsOn": [
-											{
-												"activity": "23_1_2_file_to_archive",
-												"dependencyConditions": [
-													"Succeeded"
-												]
-											}
-										],
+										"dependsOn": [],
 										"policy": {
 											"timeout": "7.00:00:00",
 											"retry": 0,
@@ -132,7 +129,7 @@
 														"type": "Expression"
 													},
 													"filename": {
-														"value": "@item().source.filename",
+														"value": "@{concat(item().source.filename, '*')}",
 														"type": "Expression"
 													}
 												}
@@ -141,16 +138,19 @@
 											"storeSettings": {
 												"type": "AzureBlobStorageReadSettings",
 												"recursive": true,
-												"wildcardFileName": "*"
+												"wildcardFileName": {
+													"value": "@{concat(item().source.filename, '*')}",
+													"type": "Expression"
+												}
 											}
 										}
 									},
 									{
-										"name": "23_1_2_file_to_archive",
+										"name": "23_2_1_3_file_to_archive",
 										"type": "Copy",
 										"dependsOn": [
 											{
-												"activity": "23_1_1_file_to_warehouse",
+												"activity": "23_2_1_2_file_to_warehouse",
 												"dependencyConditions": [
 													"Succeeded"
 												]
@@ -218,9 +218,16 @@
 										]
 									},
 									{
-										"name": "23_2_1_1_file_to_trash",
+										"name": "23_2_1_4_file_to_trash",
 										"type": "Delete",
-										"dependsOn": [],
+										"dependsOn": [
+											{
+												"activity": "23_2_1_3_file_to_archive",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
 										"policy": {
 											"timeout": "7.00:00:00",
 											"retry": 0,
@@ -237,7 +244,7 @@
 													"Container": "data",
 													"Directory": "dtm_eng/ref",
 													"filename": {
-														"value": "@item().source.filename",
+														"value": "@{concat(item().source.filename, '*')}",
 														"type": "Expression"
 													}
 												}
@@ -246,7 +253,10 @@
 											"storeSettings": {
 												"type": "AzureBlobStorageReadSettings",
 												"recursive": true,
-												"wildcardFileName": "*"
+												"wildcardFileName": {
+													"value": "@{concat(item().source.filename ,'*')}",
+													"type": "Expression"
+												}
 											}
 										}
 									}
@@ -305,7 +315,8 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"Container": "data",
-							"Directory": "dtm_eng/ref"
+							"Directory": "dtm_eng/ref",
+							"filename": "*.xlsx"
 						}
 					},
 					"fieldList": [
@@ -326,7 +337,7 @@
 				"defaultValue": [
 					{
 						"source": {
-							"filename": "glu_master_data_login.xlsx"
+							"filename": "glu_master_data_login"
 						},
 						"destination": {
 							"directory": "tmp_master_data_login_employee"
@@ -334,7 +345,7 @@
 					},
 					{
 						"source": {
-							"filename": "siop_master_data_employee.xlsx"
+							"filename": "siop_master_data_employee"
 						},
 						"destination": {
 							"directory": "tmp_master_data_employee"
@@ -342,7 +353,7 @@
 					},
 					{
 						"source": {
-							"filename": "siop_master_data_employee_hierarchy_functional.xlsx"
+							"filename": "siop_master_data_employee_hierarchy_functional"
 						},
 						"destination": {
 							"directory": "tmp_master_data_employee_hierarchy_functional"
