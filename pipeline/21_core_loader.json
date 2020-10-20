@@ -178,6 +178,19 @@
 														"type": "Expression"
 													}
 												}
+											},
+											{
+												"name": "set_country_query_copy1",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "SELECT \n*\n  FROM [reg20_master_data_core].[country] c\n",
+														"type": "Expression"
+													}
+												}
 											}
 										]
 									},
@@ -211,6 +224,24 @@
 													"variableName": "core_query",
 													"value": {
 														"value": "SELECT *\n  FROM [reg20_master_data_core].[site]",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"value": "client",
+										"activities": [
+											{
+												"name": "set_client_query",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "core_query",
+													"value": {
+														"value": "SELECT \n*\n  FROM [reg20_master_data_core].[client] c\n",
 														"type": "Expression"
 													}
 												}
@@ -308,6 +339,14 @@
 						},
 						"destination": {
 							"fileName": "country/country.parquet"
+						}
+					},
+					{
+						"source": {
+							"table": "client"
+						},
+						"destination": {
+							"fileName": "client/client.parquet"
 						}
 					},
 					{
