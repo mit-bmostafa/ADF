@@ -92,7 +92,7 @@
 					{
 						"source": {
 							"table": "company",
-							"parent1": "company",
+							"parent1": "employee",
 							"parent2": "company"
 						}
 					},
