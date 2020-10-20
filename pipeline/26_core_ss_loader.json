@@ -85,7 +85,8 @@
 					{
 						"source": {
 							"table": "skill",
-							"parent1": "skill"
+							"parent1": "skill",
+							"parent2": "skill"
 						}
 					},
 					{
