@@ -1,0 +1,25 @@
+{
+	"name": "ref_xls_in_blob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lksazureblobstorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"worksheet": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "dtm_eng",
+				"container": "data"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	}
+}
