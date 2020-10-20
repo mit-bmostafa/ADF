@@ -5,7 +5,14 @@
 			{
 				"name": "21_1_loop_files",
 				"type": "ForEach",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "list_ref_files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
@@ -14,48 +21,13 @@
 					},
 					"activities": [
 						{
-							"name": "list_ref_files",
-							"type": "GetMetadata",
-							"dependsOn": [],
-							"policy": {
-								"timeout": "7.00:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"dataset": {
-									"referenceName": "ref_csv_excel_in_blob",
-									"type": "DatasetReference"
-								},
-								"fieldList": [
-									"childItems"
-								],
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings"
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							}
-						},
-						{
 							"name": "process_if_exists",
 							"type": "IfCondition",
-							"dependsOn": [
-								{
-									"activity": "list_ref_files",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
+							"dependsOn": [],
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@greaterOrEquals(indexof(string(activity('list_ref_files').output.childItems), item()), 0)",
+									"value": "@greaterOrEquals(indexof(string(activity('list_ref_files').output.childItems), item().source.filename), 0)",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
@@ -286,16 +258,9 @@
 				}
 			},
 			{
-				"name": "21_2_tmp_to_core",
-				"type": "HDInsightHive",
-				"dependsOn": [
-					{
-						"activity": "21_1_loop_files",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"name": "list_ref_files",
+				"type": "GetMetadata",
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -305,15 +270,19 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"scriptPath": "hive/scripts/reg20_master_data_core.hql",
-					"scriptLinkedService": {
-						"referenceName": "lksazureblobstorage",
-						"type": "LinkedServiceReference"
+					"dataset": {
+						"referenceName": "ref_csv_excel_in_blob",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings"
+					},
+					"formatSettings": {
+						"type": "BinaryReadSettings"
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "lkshdinsight",
-					"type": "LinkedServiceReference"
 				}
 			}
 		],
